@@ -1,0 +1,42 @@
+{
+	"name": "pb",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc",
+		"start": "node dest/index.js",
+		"dev": "ts-node-dev --respawn src/index.ts",
+		"inspect": "nodemon --inspect dest/index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/express": "latest",
+		"@types/jsonwebtoken": "latest",
+		"@types/lodash": "latest",
+		"@types/node": "latest",
+		"@types/pigpio": "^3.1.0",
+		"@types/rpi-gpio": "^2.1.1",
+		"nodemon": "^latest",
+		"ts-node": "latest",
+		"ts-node-dev": "^latest",
+		"typescript": "latest"
+	},
+	"dependencies": {
+		"apollo-datasource-mongodb": "^0.5.4",
+		"apollo-server": "latest",
+		"apollo-server-core": "latest",
+		"apollo-server-express": "latest",
+		"cookie-parser": "latest",
+		"cors": "latest",
+		"express": "latest",
+		"graphql": "latest",
+		"graphql-request": "latest",
+		"http-errors": "latest",
+		"jsonwebtoken": "latest",
+		"mongodb": "latest"
+	}
+}
