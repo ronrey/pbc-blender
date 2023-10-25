@@ -1,5 +1,4 @@
 import { request, gql } from 'graphql-request';
-import SERVER_URL from '../constants/apollo';
 import { Status } from '../types';
 const GET_GRAMS = gql`
 	query getGrams($nodeId: Int) {
@@ -27,14 +26,14 @@ export class Module {
 		console.log('data', node);
 		return node;
 	};
-	async feed(nodeId: number, grams: number): Promise<Status {
+	async feed(nodeId: number, grams: number): Promise<Status> {
 		const variables = {
 			grams: grams,
 			nodeId: nodeId,
 		};
 		console.log('feed', variables);
 
-		const response = await request(this.endpoint, FEED, variables) as Status;
+		const response = (await request(this.endpoint, FEED, variables)) as Status;
 
 		console.log('data', response);
 		return response;

@@ -11,16 +11,16 @@ export const typeDefs = gql`
 		message: String
 	}
 	input blendInput {
-		coffeeId: Int!
-		moduleId: Int!
-		weight: Float!
+		nodeId: Int!
+		grams: Float!
 	}
+
 	type Query {
 		status: Status
 	}
 	type Mutation {
 		stop: Status
-		blend(blend: [blendInput!]!): Status
+		blend(blend: [blendInput]): Status
 	}
 `;
 export default typeDefs;
