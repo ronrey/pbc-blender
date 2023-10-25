@@ -37,6 +37,7 @@
 		"graphql-request": "latest",
 		"http-errors": "latest",
 		"jsonwebtoken": "latest",
-		"mongodb": "latest"
+		"mongodb": "latest",
+		"onoff": "^6.0.3"
 	}
 }

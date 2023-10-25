@@ -20,7 +20,7 @@ export const typeDefs = gql`
 	}
 	type Mutation {
 		stop: Status
-		blend(coffees: [blendInput!]!): Status
+		blend(blend: [blendInput!]!): Status
 	}
 `;
 export default typeDefs;
