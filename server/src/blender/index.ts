@@ -19,6 +19,11 @@ interface module {
 	nodeIds: number[];
 	module: Module;
 }
+interface blendItem {
+	nodeId: number;
+	grams: number;
+}
+
 export class Blender {
 	private modules: module[];
 	constructor() {
@@ -38,22 +43,20 @@ export class Blender {
 			return await module.feed(nodeId, grams);
 		}
 	}
-}
+	async blend(blendItems: BlendItem[]): Promise<Status> {
+		const results = await Promise.all(
+			blendItems.map(async blendItem => {
+				const module = this.getModuleByNodeId(blendItem.moduleId);
+				if (!module) {
+					throw new Error('Module not found');
+				}
+				return await module.feed(blendItem.moduleId, blendItem.weight);
+			})
+		);
 
-export function getUrlByNodeId(nodeId: number): string | null {
-	const module = modules.find(m => m.nodeIds.includes(nodeId));
-	return module ? module.url : null;
-}
-
-export async function feed(nodeId: number, grams: number): Promise<Status> {
-	const url = getUrlByNodeId(nodeId);
-	if (!url) {
-	} else return { success: false, code: '404', message: 'module not found' };
-	return { success: true, code: '200', message: 'feed' };
-}
-export async function blend(blendItems: BlendItem[]): Promise<Status> {
-	blendItems.map(blendItem => {
-		console.log(blendItem);
-	});
-	return { success: true, code: '200', message: 'blend' };
+		if (results.some(result => !result.success)) {
+			return { success: false, code: '400', message: 'One or more blends failed' };
+		}
+		return { success: true, code: '200', message: 'Blend successful' };
+	}
 }
