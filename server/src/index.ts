@@ -63,7 +63,7 @@ async function startApolloServer() {
 		path: '/',
 	});
 
-	const PORT = 4101;
+	const PORT = 1768;
 	await new Promise(resolve => {
 		console.log('listen');
 		httpServer.listen({ port: PORT }, () => {
