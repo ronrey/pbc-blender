@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a05bda5b.css",
+    "main.js": "/static/js/main.f7634125.js",
+    "static/js/787.94030ec6.chunk.js": "/static/js/787.94030ec6.chunk.js",
+    "static/media/Display-Heavy.otf": "/static/media/Display-Heavy.481707abb5ccb95260af.otf",
+    "static/media/Display-Bold.otf": "/static/media/Display-Bold.922b6b74886716f67a6f.otf",
+    "static/media/Display-Semibold.otf": "/static/media/Display-Semibold.8975d33a9cb24a490eef.otf",
+    "static/media/Display-Medium.otf": "/static/media/Display-Medium.7de3dd11f86463b9a9de.otf",
+    "static/media/Display-Light.otf": "/static/media/Display-Light.e2105c9bcacf514b1f9b.otf",
+    "static/media/Display-Regular.otf": "/static/media/Display-Regular.b3746ade655791fa5bb5.otf",
+    "static/media/Display-Black.otf": "/static/media/Display-Black.5b957daa3369642ff94a.otf",
+    "static/media/Display-Thin.otf": "/static/media/Display-Thin.8526c87b1c15ea0cfe7b.otf",
+    "static/media/Display-Ultralight.otf": "/static/media/Display-Ultralight.7ee397f061ad2dcfacb4.otf",
+    "static/media/Text-RegularItalic.otf": "/static/media/Text-RegularItalic.195df6af4159da6abbb4.otf",
+    "static/media/Gaitera_Ball-demo-FFP.ttf": "/static/media/Gaitera_Ball-demo-FFP.30f450759cfbe0008eb4.ttf",
+    "index.html": "/index.html",
+    "main.a05bda5b.css.map": "/static/css/main.a05bda5b.css.map",
+    "main.f7634125.js.map": "/static/js/main.f7634125.js.map",
+    "787.94030ec6.chunk.js.map": "/static/js/787.94030ec6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a05bda5b.css",
+    "static/js/main.f7634125.js"
+  ]
+}

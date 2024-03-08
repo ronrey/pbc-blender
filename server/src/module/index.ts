@@ -10,6 +10,12 @@ const FEED = gql`
 		feed(nodeId: $nodeId, grams: $grams)
 	}
 `;
+export interface ModuleInterface {
+	getNode(id: number): Promise<any>;
+	feed(nodeId: number, grams: number): Promise<Status>;
+}
+export type StationId = [number, number];
+
 export class Module {
 	endpoint: string;
 	constructor(endpoint: string) {
@@ -26,17 +32,20 @@ export class Module {
 		console.log('data', node);
 		return node;
 	};
-	async feed(nodeId: number, grams: number): Promise<Status> {
+	async feed(stationId: number, grams: number): Promise<Status> {
 		const variables = {
 			grams: grams,
-			nodeId: nodeId,
+			nodeId: stationId,
 		};
-		console.log('feed', variables);
-
+		console.log('feed', variables, this.endpoint);
+		/* 
+turn this back on after testing
 		const response = (await request(this.endpoint, FEED, variables)) as Status;
 
 		console.log('data', response);
 		return response;
+		 */
+		return { success: true, code: 200, message: 'OK' };
 	}
 }
 

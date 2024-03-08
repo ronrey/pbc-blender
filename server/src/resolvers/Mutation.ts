@@ -4,10 +4,6 @@ import { getBlender } from '../blender';
 import { blendItem } from '../types/blender';
 
 export const Mutation = {
-	// blend: async (_: null, args: [{ nodeId: number; grams: number }]) => {
-	// 	return await getBlender().blend(args);
-	// },
-
 	blend: async (_: null, args: { blend: blendItem[] }) => {
 		return await getBlender().blend(args.blend);
 	},

@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'Gaitera';
+  src: url('./fonts/Gaitera_Ball-demo-FFP.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFRegular';
+  src: url('./fonts/Display-Regular.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFBold';
+  src: url('./fonts/Display-Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFSemiBold';
+  src: url('./fonts/Display-Semibold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFHeavy';
+  src: url('./fonts/Display-Heavy.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFLight';
+  src: url('./fonts/Display-Light.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFBlack';
+  src: url('./fonts/Display-Black.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFItalic';
+  src: url('./fonts/Text-RegularItalic.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFMedium';
+  src: url('./fonts/Display-Medium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFThin';
+  src: url('./fonts/Display-Thin.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SFUltralight';
+  src: url('./fonts/Display-Ultralight.otf') format('truetype');
+}

@@ -1,17 +1,14 @@
 import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
 	scalar DateTime
-	type Weight {
-		adjusted: Float
-		raw: Float
-	}
+
 	type Status {
 		success: Boolean
 		code: String
 		message: String
 	}
-	input blendInput {
-		nodeId: Int!
+	input BlendItemInput {
+		coffeeId: Int!
 		grams: Float!
 	}
 
@@ -20,7 +17,7 @@ export const typeDefs = gql`
 	}
 	type Mutation {
 		stop: Status
-		blend(blend: [blendInput]): Status
+		blend(blend: [BlendItemInput]): Status
 	}
 `;
 export default typeDefs;

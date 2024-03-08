@@ -1,51 +1,45 @@
 import { Status } from '../types/';
-import { Module } from '../module';
-import { blendItem } from '../types/blender';
-const modules = [
-	{ nodeIds: [0, 1, 2], url: `http://pcb1.local:4000/graphql` },
-	{ nodeIds: [3, 4, 5], url: `http://pcb2.local:4000/graphql` },
-	{ nodeIds: [6, 7, 8], url: `http://pcb3.local:4000/graphql` },
-	{ nodeIds: [9, 10, 11], url: `http://pcb4.local:4000/graphql` },
-	{ nodeIds: [12, 13, 14], url: `http://pcb5.local:4000/graphql` },
-	{ nodeIds: [15, 16, 16], url: `http://pcb6.local:4000/graphql` },
-];
+import { Module, ModuleInterface } from '../module';
+import { blendItem, NumberTupleArray, TwoNumberTuple } from '../types/blender';
+import { coffeeToModules, moduleUrls, CoffeeModule, ModuleUrl } from './settings';
 
-interface module {
-	nodeIds: number[];
+interface moduleInterface {
+	moduleId: number;
 	module: Module;
 }
 
 export interface blenderInterface {
 	blend(blendItems: blendItem[]): Promise<Status>;
 }
+export type StationPath = [number, number];
 
 class Blender {
-	private modules: module[];
+	private modules: moduleInterface[];
 	constructor() {
-		this.modules = modules.map(m => {
-			return { nodeIds: m.nodeIds, module: new Module(m.url) };
+		this.modules = moduleUrls.map((m, i) => {
+			return { moduleId: i, module: new Module(m) };
 		});
 	}
-	private getModuleByNodeId(nodeId: number): Module | null {
-		const module = this.modules.find(m => m.nodeIds.includes(nodeId));
-		return module ? module.module : null;
-	}
-	private async feed(nodeId: number, grams: number): Promise<Status> {
-		const module = this.getModuleByNodeId(nodeId);
-		if (!module) {
-			return Promise.resolve({ success: false, code: 404, message: 'module not found' });
-		} else {
-			return await module.feed(nodeId, grams);
+	private GetPathByCoffeeId(coffeeId: number): StationPath | undefined {
+		const coffee: CoffeeModule | undefined = coffeeToModules.find(
+			(coffee: CoffeeModule) => coffee.coffeeId === coffeeId
+		);
+		if (!coffee) {
+			return undefined;
 		}
+		return [coffee.moduleId, coffee.stationId];
 	}
+
 	public async blend(blendItems: blendItem[]) {
 		const results = await Promise.all(
 			blendItems.map(async blendItem => {
-				const module = this.getModuleByNodeId(blendItem.nodeId);
-				if (!module) {
+				const path = this.GetPathByCoffeeId(blendItem.coffeeId);
+				if (!path) {
 					throw new Error('Module not found');
 				}
-				return await module.feed(blendItem.nodeId, blendItem.grams);
+				const module = this.modules[path[0]].module;
+				const stationId = path[1];
+				return await module.feed(stationId, blendItem.grams);
 			})
 		);
 		if (results.some(result => !result.success)) {
