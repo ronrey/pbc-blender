@@ -16,41 +16,46 @@ interface Props {
 
 const protoBlend = {
 	coffeeId: 0,
-	grams: 0,
+	grams: 10,
 };
 
 const coffeeList = [
-	{ value: 0, display: 'Coffee 0' },
-	{ value: 1, display: 'Coffee 1' },
-	{ value: 2, display: 'Coffee 2' },
-	{ value: 3, display: 'Coffee 3' },
-	{ value: 4, display: 'Coffee 4' },
-	{ value: 5, display: 'Coffee 5' },
+	{ value: 0, display: 'mod 1 - node 1' },
+	{ value: 1, display: 'mod 1 - node 2' },
+	{ value: 2, display: 'mod 1 - node 3' },
+	{ value: 3, display: 'mod 2 - node 1' },
+	{ value: 4, display: 'mod 2 - node 2' },
+	{ value: 5, display: 'mod 2 - node 3' },
 ];
 export const BlendList: React.FC<Props> = ({ list, onChange, title }) => {
 	const [edit, setEdit] = useState<BlendItem>({ ...protoBlend });
-	const handleListItemChange = (
-		key: string,
-		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-		i: number
-	) => {
+	// const handleListItemChange = (
+	// 	key: string,
+	// 	event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	// 	i: number
+	// ) => {
+	// 	const newList = cloneDeep(list);
+	// 	const item = newList[i];
+	// 	switch (key) {
+	// 		case 'coffeeId':
+	// 			item.coffeeId = parseInt(event.target.value);
+	// 			break;
+	// 		case 'grams':
+	// 			item.grams = parseFloat(event.target.value);
+	// 			break;
+	// 		default:
+	// 			debugger;
+	// 	}
+	// 	if (newList) onChange(newList);
+	// };
+	function onListGramsChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, i: number) {
 		const newList = cloneDeep(list);
 		const item = newList[i];
-		debugger;
-		switch (key) {
-			case 'coffeeId':
-				item.coffeeId = parseInt(event.target.value);
-				break;
-			case 'grams':
-				item.grams = parseFloat(event.target.value);
-				break;
-			default:
-				debugger;
-		}
+		item.grams = parseFloat(event.target.value);
+
 		if (newList) onChange(newList);
-	};
+	}
 	const handleAdd = () => {
-		//debugger
 		const newList = [...list];
 		if (edit !== null) newList.push(edit);
 
@@ -58,7 +63,6 @@ export const BlendList: React.FC<Props> = ({ list, onChange, title }) => {
 		if (newList) onChange(newList);
 	};
 	const handleDelete = (i: number) => {
-		//debugger
 		const newList = [...list];
 		newList.splice(i, 1);
 		if (newList) onChange(newList);
@@ -69,7 +73,6 @@ export const BlendList: React.FC<Props> = ({ list, onChange, title }) => {
 		setEdit(newEdit);
 	}
 	function onCoffeeIdEditChange(value: number | string) {
-		debugger;
 		const newEdit = { ...edit };
 		newEdit.coffeeId = typeof value === 'string' ? +value : value;
 		setEdit(newEdit);
@@ -88,12 +91,14 @@ export const BlendList: React.FC<Props> = ({ list, onChange, title }) => {
 						<Input
 							css={styles.editInput}
 							value={item.grams}
-							onChange={e => handleListItemChange('grams', e, i)}
+							onChange={e => onListGramsChange(e, i)}
 							type="number"
-							inputProps={{
-								min: 0.01,
-								step: 0.01,
-							}}
+							inputProps={
+								{
+									// min: 0.01,
+									// step: 0.01,
+								}
+							}
 						/>
 
 						<Select value={item.coffeeId} onChange={e => onListCoffeeChange(i, e.target.value)}>
@@ -115,7 +120,7 @@ export const BlendList: React.FC<Props> = ({ list, onChange, title }) => {
 
 	const renderEdit = () => {
 		return (
-			<div css={styles.editContainer}>
+			<Paper elevation={8} css={styles.editContainer}>
 				<Input
 					css={styles.editInput}
 					value={edit.grams}
@@ -143,7 +148,7 @@ export const BlendList: React.FC<Props> = ({ list, onChange, title }) => {
 						<NotInterestedIcon fontSize="small" color="error" />
 					)}
 				</Button>
-			</div>
+			</Paper>
 		);
 	};
 	return (

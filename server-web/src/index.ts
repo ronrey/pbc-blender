@@ -10,7 +10,7 @@ async function startServer() {
 		// Define a catch-all route that serves React application's HTML file.
 		res.sendFile(path.join(__dirname, 'client', 'index.html'));
 	});
-	const PORT = 8080; // Start the Express server
+	const PORT = 8081; // Start the Express server
 	app.listen(PORT, () => logger.info(`🚀 Server ready at http://localhost:${PORT}`));
 }
 startServer();

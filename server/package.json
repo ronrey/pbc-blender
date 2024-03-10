@@ -22,7 +22,6 @@
 		"typescript": "latest"
 	},
 	"dependencies": {
-		"apollo-datasource-mongodb": "^0.5.4",
 		"apollo-server": "latest",
 		"apollo-server-core": "latest",
 		"apollo-server-express": "latest",

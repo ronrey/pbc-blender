@@ -15,7 +15,6 @@ export interface ModuleInterface {
 	feed(nodeId: number, grams: number): Promise<Status>;
 }
 export type StationId = [number, number];
-
 export class Module {
 	endpoint: string;
 	constructor(endpoint: string) {
@@ -38,14 +37,9 @@ export class Module {
 			nodeId: stationId,
 		};
 		console.log('feed', variables, this.endpoint);
-		/* 
-turn this back on after testing
 		const response = (await request(this.endpoint, FEED, variables)) as Status;
-
 		console.log('data', response);
 		return response;
-		 */
-		return { success: true, code: 200, message: 'OK' };
 	}
 }
 

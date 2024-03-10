@@ -10,6 +10,7 @@ const logger = winston.createLogger({
 	transports: [
 		// new Winston.transports.File({ filename: 'error.log', level: 'error' }),
 		//  new winston.transports.File({ filename: "index.log" }),
+		new winston.transports.Console(),
 	],
 });
 if (process.env.NODE_ENV !== 'production') {

@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { ControlPanels } from '../controlPanels';
 import { BlenderControls } from '../blenderControls';
 interface Props {}
 export const AppRoutes: React.FC<Props> = () => {

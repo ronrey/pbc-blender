@@ -1,0 +1,31 @@
+[Unit]
+Description=pbc_blender_web
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/npm start
+WorkingDirectory=/home/ron/blender/server-web
+Restart=on-failure
+User=root
+Group=root
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=development
+
+[Install]
+WantedBy=multi-user.target
+
+
+sudo nano /etc/systemd/system/pbc_blender_web_app.service
+ 
+sudo systemctl daemon-reload
+
+sudo systemctl start pbc_blender_web_app
+sudo systemctl status pbc_blender_web_app
+sudo systemctl restart pbc_blender_web_app
+sudo systemctl stop pbc_blender_web_app
+sudo systemctl enable pbc_blender_web_app
+sudo systemctl disable pbc_blender_web_app
+sudo journalctl -fu pbc_blender_web_app
+
+
+cd ~/blender/server-web/; yarn build; sudo systemctl restart pbc_blender_web_app; sudo journalctl -fu pbc_blender_web_app;

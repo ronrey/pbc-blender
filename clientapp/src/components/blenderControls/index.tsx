@@ -1,26 +1,17 @@
 /** @jsxImportSource @emotion/react */
 // src/Counter.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, CircularProgress, Input } from '@mui/material';
-import { Typography, Paper } from '@mui/material';
+import { Typography } from '@mui/material';
 import { styles } from './styles';
-import { ControlPanel } from '../controlPanel';
 import { useMutation, gql } from '@apollo/client';
-import useConfig from '../hooks/useConfig';
-import { render } from '@testing-library/react';
 import BlendList from '../BlendList';
 interface Props {}
 export interface BlendItem {
 	coffeeId: number;
 	grams: number;
 }
-const blendListProto = [
-	{ coffeeId: 0, grams: 0 },
-	{ coffeeId: 1, grams: 0 },
-	{ coffeeId: 2, grams: 0 },
-	{ coffeeId: 3, grams: 0 },
-	{ coffeeId: 4, grams: 0 },
-];
+const blendListProto = [{ coffeeId: 0, grams: 0 }];
 export const BlenderControls: React.FC<Props> = () => {
 	const STOP = gql`
 		mutation stopAll {
@@ -38,10 +29,9 @@ export const BlenderControls: React.FC<Props> = () => {
 			}
 		}
 	`;
-	const [grams, setGrams] = useState(1);
 	const [showProgress, setShowProgress] = useState(false);
 	const [blendList, setBlendList] = useState(blendListProto);
-	const [blenderControls] = useMutation(BLEND, {
+	const [blend] = useMutation(BLEND, {
 		onCompleted(data) {
 			setShowProgress(false);
 			debugger;
@@ -65,32 +55,18 @@ export const BlenderControls: React.FC<Props> = () => {
 		stop();
 	}
 	function renderState() {
-		return (
-			<div css={styles.stateContainer}>
-				<Typography css={styles.title} variant="h6">
-					state
-				</Typography>
-			</div>
-		);
+		return <div css={styles.stateContainer}></div>;
 	}
 	function renderControls() {
-		return (
-			<div css={styles.controlContainer}>
-				<Typography css={styles.title} variant="h6">
-					controls
-				</Typography>
-				{renderBlendControl()}
-			</div>
-		);
+		return <div css={styles.controlContainer}>{renderBlendControl()}</div>;
 	}
 	function onListChange(list: BlendItem[]) {
 		setBlendList(list);
-		debugger;
 	}
 	function renderBlendControl() {
 		return (
 			<div css={styles.container}>
-				<BlendList list={blendList} title="test" onChange={onListChange} />
+				<BlendList list={blendList} title="Blend" onChange={onListChange} />
 				{showProgress && <CircularProgress css={styles.progress} />}
 				<div css={styles.controls}>
 					<div css={styles.InputAndButton}>
@@ -114,14 +90,16 @@ export const BlenderControls: React.FC<Props> = () => {
 
 	function onHandleBlend() {
 		setShowProgress(true);
-		blenderControls({
+		// const newBlend = blendList.map((item, i) => {
+		// 	return { "coffeeId":item.coffeeId, "grams":item.grams };
+		// });
+		const newBlend = blendList.map((item, i) => ({
+			coffeeId: item.coffeeId,
+			grams: item.grams,
+		}));
+		blend({
 			variables: {
-				blend: [
-					{
-						grams: grams,
-						nodeId: 1,
-					},
-				],
+				blend: newBlend,
 			},
 		});
 	}
@@ -145,5 +123,4 @@ export const BlenderControls: React.FC<Props> = () => {
 		</div>
 	);
 };
-
 export default BlenderControls;
