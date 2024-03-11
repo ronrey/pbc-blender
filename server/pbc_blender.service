@@ -28,4 +28,4 @@ sudo systemctl disable pbc_blender_app
 sudo journalctl -fu pbc_blender_app
 
 
-yarn build; sudo systemctl restart pbc_blender_app; sudo journalctl -fu pbc_blender_app;
+cd ~/blender/server: yarn build; sudo systemctl restart pbc_blender_app; sudo journalctl -fu pbc_blender_app;

@@ -1,13 +1,21 @@
 import { request, gql } from 'graphql-request';
 import { Status } from '../types';
 const GET_GRAMS = gql`
-	query getGrams($nodeId: Int) {
-		getScaleGrams(nodeId: $nodeId)
+	mutation Feed($nodeId: Int, $grams: Float) {
+		feed(nodeId: $nodeId, grams: $grams) {
+			code
+			message
+			success
+		}
 	}
 `;
 const FEED = gql`
-	mutation feed($nodeId: Int, $grams: Float) {
-		feed(nodeId: $nodeId, grams: $grams)
+	mutation Feed($nodeId: Int, $grams: Float) {
+		feed(nodeId: $nodeId, grams: $grams) {
+			code
+			message
+			success
+		}
 	}
 `;
 export interface ModuleInterface {

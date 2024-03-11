@@ -1,18 +1,15 @@
 import { Status } from '../types/';
-import { Module, ModuleInterface } from '../module';
-import { blendItem, NumberTupleArray, TwoNumberTuple } from '../types/blender';
-import { coffeeToModules, moduleUrls, CoffeeModule, ModuleUrl } from './settings';
-
+import { Module } from '../module';
+import { blendItem } from '../types/blender';
+import { coffeeToModules, moduleUrls, CoffeeModule } from './settings';
 interface moduleInterface {
 	moduleId: number;
 	module: Module;
 }
-
 export interface blenderInterface {
 	blend(blendItems: blendItem[]): Promise<Status>;
 }
 export type StationPath = [number, number];
-
 class Blender {
 	private modules: moduleInterface[];
 	constructor() {
@@ -29,8 +26,8 @@ class Blender {
 		}
 		return [coffee.moduleId, coffee.stationId];
 	}
-
 	public async blend(blendItems: blendItem[]) {
+		debugger;
 		const results = await Promise.all(
 			blendItems.map(async blendItem => {
 				const path = this.GetPathByCoffeeId(blendItem.coffeeId);

@@ -26,6 +26,14 @@ export const coffeeToModules: CoffeeModule[] = [
 
 export type ModuleUrl = string;
 
+// export const moduleUrls: ModuleUrl[] = [
+// 	`http://localhost:4000/graphql`,
+// 	`http://localhost:4000/graphql`,
+// 	`http://localhost:4000/graphql`,
+// 	`http://localhost:4000/graphql`,
+// 	`http://localhost:4000/graphql`,
+// 	`http://localhost:4000/graphql`,
+// ];
 export const moduleUrls: ModuleUrl[] = [
 	`http://pcb1.local:4000/graphql`,
 	`http://pcb2.local:4000/graphql`,
