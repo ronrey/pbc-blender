@@ -7,6 +7,11 @@ export const typeDefs = gql`
 		code: String
 		message: String
 	}
+	type Reading {
+		grams: Float
+		index: Int
+		nodeId: Int
+	}
 	input BlendItemInput {
 		coffeeId: Int!
 		grams: Float!
@@ -14,10 +19,25 @@ export const typeDefs = gql`
 
 	type Query {
 		status: Status
+		getServerName(index: Int): String
+		getScaleReading(index: Int, nodeId: Int): Float
+		getScaleGrams(index: Int, nodeId: Int): Float
+		getSiloReading(index: Int, nodeId: Int): Float
+		getSiloGrams(index: Int, nodeId: Int): Reading
+		getScaleBaseline(index: Int, nodeId: Int): Float
+		getSiloBaseline(index: Int, nodeId: Int): Float
 	}
 	type Mutation {
 		stop: Status
 		blend(blend: [BlendItemInput]): Status
+		stopFeed(index: Int, nodeId: Int): Status
+		startFeed(index: Int, nodeId: Int): Status
+		feed(index: Int, nodeId: Int, grams: Float): Status
+		tareScale(index: Int, nodeId: Int): Status
+		tareSilo(index: Int, nodeId: Int): Status
+		openGate(index: Int, nodeId: Int): Status
+		closeGate(index: Int, nodeId: Int): Status
+		cycleGate(index: Int, nodeId: Int): Status
 	}
 `;
 export default typeDefs;

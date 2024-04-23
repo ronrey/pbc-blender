@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/npm start
-WorkingDirectory=/home/ron/blender
+WorkingDirectory=/home/ron/blender/server
 Restart=on-failure
 User=root
 Group=root
@@ -21,10 +21,10 @@ sudo systemctl daemon-reload
 
 sudo systemctl start pbc_blender_app
 sudo systemctl status pbc_blender_app
-sudo systemctl restart pbc_blender_app
 sudo systemctl stop pbc_blender_app
 sudo systemctl enable pbc_blender_app
 sudo systemctl disable pbc_blender_app
+sudo systemctl restart pbc_blender_app
 sudo journalctl -fu pbc_blender_app
 
 

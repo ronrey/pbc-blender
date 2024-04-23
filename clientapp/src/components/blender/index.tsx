@@ -6,8 +6,6 @@ import { Typography } from '@mui/material';
 import { styles } from './styles';
 import { useMutation, gql } from '@apollo/client';
 import BlendList from '../BlendList';
-import { MenuBar } from '../menuBar';
-
 interface Props {}
 export interface BlendItem {
 	coffeeId: number;
@@ -107,8 +105,7 @@ export const BlenderControls: React.FC<Props> = () => {
 	}
 	return (
 		<div css={styles.container}>
-			<MenuBar dept="controls" />
-
+			<Typography css={styles.titleContainer}>v a1.000</Typography>
 			<Button
 				css={styles.stopButton}
 				variant="contained"

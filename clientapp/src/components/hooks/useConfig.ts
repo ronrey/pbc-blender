@@ -22,7 +22,6 @@ function useConfig(): config {
 				return response.json();
 			})
 			.then(data => {
-				debugger;
 				setServerName(data.serverName);
 				setServerURL(`http://${data.serverName}:1768`);
 				//	setServerURL(`http://localhost:1768`);

@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
-import logger from 'winston';
+import logger from './winston';
 
 import express from 'express';
 import http from 'http';
