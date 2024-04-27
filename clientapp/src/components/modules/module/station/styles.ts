@@ -17,26 +17,26 @@ export const styles = createStyles({
 	stateContainer: {
 		display: 'flex',
 		flexFlow: 'row wrap',
-		padding: 8,
+		padding: 4,
 		margin: 'auto',
 	},
 	controlContainer: {
 		display: 'flex',
 		flexFlow: 'column wrap',
-		padding: 8,
+		padding: 4,
 		margin: 'auto',
 	},
 	blendControlContainer: {
 		display: 'flex',
 		flexFlow: 'row wrap',
-		padding: 8,
+		padding: 4,
 		margin: 'auto',
 	},
 	container: {
 		display: 'flex',
 		flexFlow: 'column',
 		margin: 4,
-		padding: 8,
+		padding: 4,
 	},
 	stopButton: {
 		width: '80%',

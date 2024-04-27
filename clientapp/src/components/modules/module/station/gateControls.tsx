@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
-import { Button, CircularProgress, TextField, Input, Paper, Typography } from '@mui/material';
+import { Button, CircularProgress, Paper, Typography } from '@mui/material';
 import { styles } from './styles';
 import { useMutation, gql } from '@apollo/client';
 interface Props {
 	nodeId: number;
-	moduleId: number;
+	index: number;
 }
-
-export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
+export const GateControl: React.FC<Props> = ({ nodeId, index }) => {
 	const CYCLE_GATE = gql`
-		mutation cycleGate {
-			cycleGate(moduleId: moduleId, nodeId: nodeId) {
+		mutation cycleGate($index: Int, $nodeId: Int) {
+			cycleGate(index: $index, nodeId: $nodeId) {
 				success
 				code
 				message
@@ -19,8 +18,8 @@ export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 		}
 	`;
 	const OPEN_GATE = gql`
-		mutation openGate {
-			openGate(moduleId: moduleId, nodeId: nodeId) {
+		mutation openGate($index: Int, $nodeId: Int) {
+			openGate(index: $index, nodeId: $nodeId) {
 				success
 				code
 				message
@@ -28,8 +27,8 @@ export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 		}
 	`;
 	const CLOSE_GATE = gql`
-		mutation closeGate {
-			closeGate(moduleId: moduleId, nodeId: nodeId) {
+		mutation closeGate($index: Int, $nodeId: Int) {
+			closeGate(index: $index, nodeId: $nodeId) {
 				success
 				code
 				message
@@ -64,12 +63,35 @@ export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 			debugger;
 		},
 	});
+	const onHandleOpen = () => {
+		openGate({
+			variables: {
+				index: index,
+				nodeId: nodeId,
+			},
+		});
+	};
 
+	const onHandleClose = () => {
+		closeGate({
+			variables: {
+				index: index,
+				nodeId: nodeId,
+			},
+		});
+	};
+	const onHandleCycle = () => {
+		cycleGate({
+			variables: {
+				index: index,
+				nodeId: nodeId,
+			},
+		});
+	};
 	return (
 		<Paper elevation={4} css={styles.container}>
 			{showProgress && <CircularProgress css={styles.progress} />}
 			<Typography css={styles.controlTitle}>Gate</Typography>
-
 			<div css={styles.onOffContainer}>
 				<Button
 					variant="contained"
@@ -77,7 +99,7 @@ export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 					color="primary"
 					css={styles.button}
 					onClick={() => {
-						cycleGate();
+						onHandleCycle();
 					}}
 				>
 					cycle
@@ -88,7 +110,7 @@ export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 					color="primary"
 					css={styles.button}
 					onClick={() => {
-						openGate();
+						onHandleOpen();
 					}}
 				>
 					open
@@ -100,7 +122,7 @@ export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 					css={styles.button}
 					style={{ marginRight: 0 }}
 					onClick={() => {
-						closeGate();
+						onHandleClose();
 					}}
 				>
 					close
@@ -109,5 +131,4 @@ export const GateControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 		</Paper>
 	);
 };
-
 export default GateControl;

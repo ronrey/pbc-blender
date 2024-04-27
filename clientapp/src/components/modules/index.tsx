@@ -1,10 +1,8 @@
 /** @jsxImportSource @emotion/react */
-// src/Counter.tsx
-import React, { useState } from 'react';
-import { Button, CircularProgress, Input } from '@mui/material';
+import React from 'react';
+import { Button } from '@mui/material';
 import { styles } from './styles';
-import { useMutation, gql, useLazyQuery } from '@apollo/client';
-import { apolloClients } from '../apollo-client';
+import { useMutation, gql } from '@apollo/client';
 import { Module } from './module';
 import { MenuBar } from '../menuBar';
 interface Props {}
@@ -12,7 +10,6 @@ export interface BlendItem {
 	coffeeId: number;
 	grams: number;
 }
-const blendListProto = [{ coffeeId: 0, grams: 0 }];
 export const Modules: React.FC<Props> = () => {
 	const STOP = gql`
 		mutation stopAll {
@@ -21,7 +18,6 @@ export const Modules: React.FC<Props> = () => {
 			}
 		}
 	`;
-
 	const [stop] = useMutation(STOP, {
 		onCompleted(data) {
 			console.log(`stopped, data:${data}`);
@@ -30,7 +26,6 @@ export const Modules: React.FC<Props> = () => {
 			debugger;
 		},
 	});
-
 	function callStopAll() {
 		console.log('callStopAll');
 		stop();
@@ -38,14 +33,11 @@ export const Modules: React.FC<Props> = () => {
 	function renderState() {
 		return <div css={styles.stateContainer}></div>;
 	}
-
 	function renderModules() {
-		console.log('renderModules', apolloClients);
 		const mods = [];
-		for (let index = 0; index < 5; index++) {
-			mods.push(<Module moduleId={index} />);
+		for (let index = 0; index < 6; index++) {
+			mods.push(<Module index={index} />);
 		}
-
 		return (
 			<div css={styles.container}>
 				<div css={styles.controlContainer}>{mods}</div>
@@ -66,7 +58,6 @@ export const Modules: React.FC<Props> = () => {
 			>
 				Emergency Stop
 			</Button>
-
 			{renderState()}
 			{renderModules()}
 		</div>

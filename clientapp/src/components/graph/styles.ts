@@ -6,11 +6,15 @@ export const styles = createStyles({
 	},
 	percentage: {
 		fontSize: '1.0rem',
-		fontFamily: 'SFBold',
+		//fontFamily: 'SFBold',
+	},
+	grams: {
+		fontSize: '1.0rem',
+		//fontFamily: 'SFBold',
 	},
 	barContainer: {
 		width: '90%',
-		height: '200px',
+		height: '150px',
 		border: '1px solid gray',
 		position: 'relative',
 		margin: 'auto',
@@ -18,5 +22,10 @@ export const styles = createStyles({
 	bar: {
 		padding: 8,
 		margin: '1%',
+	},
+	values: {
+		display: 'flex',
+		flexFlow: 'row wrap',
+		justifyContent: 'space-around',
 	},
 });

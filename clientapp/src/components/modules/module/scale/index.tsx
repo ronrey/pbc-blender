@@ -6,12 +6,12 @@ import { useLazyQuery, gql } from '@apollo/client';
 import { VerticalBar } from '../../../graph';
 import { ScaleControl } from './controls';
 interface Props {
-	moduleId: number;
+	index: number;
 	nodeId: number;
 }
 const REFRESH_RATE_VALUES = 1000;
 const FULL_WEIGHT_GRAMS = 641.29;
-export const Scale: React.FC<Props> = ({ moduleId, nodeId }) => {
+export const Scale: React.FC<Props> = ({ index, nodeId }) => {
 	const GET_SILO_GRAMS = gql`
 		query GetScaleGrams($index: Int, $nodeId: Int) {
 			getScaleGrams(index: $index, nodeId: $nodeId)
@@ -30,23 +30,21 @@ export const Scale: React.FC<Props> = ({ moduleId, nodeId }) => {
 	});
 	const fetchGrams = useCallback(
 		(nodeId: number) => {
-			getScaleGrams({ variables: { index: moduleId, nodeId } });
+			getScaleGrams({ variables: { index: index, nodeId } });
 		},
-		[getScaleGrams, moduleId]
+		[getScaleGrams, index]
 	);
 	useEffect(() => {
 		const interval = setInterval(() => {
-			//	debugger;
 			fetchGrams(nodeId);
 		}, REFRESH_RATE_VALUES);
 		return () => clearInterval(interval);
 	}, [fetchGrams, nodeId]);
 	return (
 		<Paper elevation={4} css={styles.container}>
-			<Typography css={styles.nodeId}>Scale {nodeId}</Typography>
-			<Typography css={styles.grams}>{grams.toFixed(2)}</Typography>
-			<VerticalBar percentage={(grams / FULL_WEIGHT_GRAMS) * 100} />
-			<ScaleControl nodeId={nodeId} moduleId={moduleId} />
+			<Typography css={styles.nodeId}>Scale</Typography>
+			<VerticalBar grams={grams} percentage={(grams / FULL_WEIGHT_GRAMS) * 100} />
+			<ScaleControl nodeId={nodeId} index={index} />
 		</Paper>
 	);
 };

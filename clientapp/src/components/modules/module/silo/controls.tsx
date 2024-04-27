@@ -3,12 +3,11 @@ import { useEffect, useState } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import { styles } from './styles';
 import { useMutation, gql } from '@apollo/client';
-
 interface Props {
 	nodeId: number;
-	moduleId: number;
+	index: number;
 }
-export const SiloControl: React.FC<Props> = ({ nodeId, moduleId }) => {
+export const SiloControl: React.FC<Props> = ({ nodeId, index }) => {
 	const TARE_SILO = gql`
 		mutation TareSilo($index: Int, $nodeId: Int) {
 			tareSilo(index: $index, nodeId: $nodeId) {
@@ -35,7 +34,7 @@ export const SiloControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 	const onHandleTare = () => {
 		tareSilo({
 			variables: {
-				index: moduleId,
+				index: index,
 				nodeId: nodeId,
 			},
 		});
@@ -59,5 +58,4 @@ export const SiloControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 		</div>
 	);
 };
-
 export default SiloControl;

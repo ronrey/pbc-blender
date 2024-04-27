@@ -6,21 +6,12 @@ import { useLazyQuery, gql, useMutation } from '@apollo/client';
 import { VerticalBar } from '../../../graph';
 import { SiloControl } from './controls';
 interface Props {
-	moduleId: number;
+	index: number;
 	nodeId: number;
 }
 const REFRESH_RATE_VALUES = 1000;
 const SILO_FULL_WEIGHT_GRAMS = 6128.03;
-export const Silo: React.FC<Props> = ({ moduleId, nodeId }) => {
-	const TARE_SILO = gql`
-		mutation TareSilo($index: Int, $nodeId: Int) {
-			tareSilo(index: $index, nodeId: $nodeId) {
-				code
-				message
-				success
-			}
-		}
-	`;
+export const Silo: React.FC<Props> = ({ index, nodeId }) => {
 	const GET_SILO_GRAMS = gql`
 		query GetSiloGrams($index: Int, $nodeId: Int) {
 			getSiloGrams(index: $index, nodeId: $nodeId) {
@@ -28,17 +19,6 @@ export const Silo: React.FC<Props> = ({ moduleId, nodeId }) => {
 			}
 		}
 	`;
-	const [showProgress, setShowProgress] = useState(false);
-	const [tareSilo, { loading }] = useMutation(TARE_SILO, {
-		onCompleted(data) {
-			debugger;
-			setShowProgress(false);
-		},
-		onError: err => {
-			debugger;
-			setShowProgress(false);
-		},
-	});
 	const [grams, setGrams] = useState(0);
 	const [getSiloGrams] = useLazyQuery(GET_SILO_GRAMS, {
 		fetchPolicy: 'cache-and-network',
@@ -52,9 +32,9 @@ export const Silo: React.FC<Props> = ({ moduleId, nodeId }) => {
 	});
 	const fetchGrams = useCallback(
 		(nodeId: number) => {
-			getSiloGrams({ variables: { index: moduleId, nodeId } });
+			getSiloGrams({ variables: { index: index, nodeId } });
 		},
-		[getSiloGrams, nodeId]
+		[getSiloGrams, index]
 	);
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -63,20 +43,11 @@ export const Silo: React.FC<Props> = ({ moduleId, nodeId }) => {
 		}, REFRESH_RATE_VALUES);
 		return () => clearInterval(interval);
 	}, [fetchGrams, nodeId]);
-	const onHandleTare = () => {
-		tareSilo({
-			variables: {
-				index: moduleId,
-				nodeId: nodeId,
-			},
-		});
-	};
 	return (
 		<Paper elevation={4} css={styles.container}>
-			<Typography css={styles.nodeId}>Silo {nodeId}</Typography>
-			<Typography css={styles.grams}>{grams.toFixed(2)}</Typography>
-			<VerticalBar percentage={(grams / SILO_FULL_WEIGHT_GRAMS) * 100} />
-			<SiloControl nodeId={nodeId} moduleId={moduleId} />
+			<Typography css={styles.nodeId}>Silo</Typography>
+			<VerticalBar showColor={true} grams={grams} percentage={(grams / SILO_FULL_WEIGHT_GRAMS) * 100} />
+			<SiloControl nodeId={nodeId} index={index} />
 		</Paper>
 	);
 };

@@ -7,7 +7,7 @@ export const styles = createStyles({
 		// margin: "auto",
 		// width: 388,
 		margin: 8,
-		padding: 8,
+		padding: 4,
 	},
 	inputContainer: {
 		display: 'flex',
@@ -31,7 +31,7 @@ export const styles = createStyles({
 		alignItems: 'center',
 		margin: 'auto',
 		marginBottom: 32,
-		padding: 8,
+		padding: 4,
 	},
 	itemContainer: {
 		display: 'flex',
@@ -39,14 +39,14 @@ export const styles = createStyles({
 		margin: 'auto',
 		//justifyContent: 'space-around',
 		alignItems: 'center',
-		// padding: 8
+		// padding: 4
 	},
 	item: {
 		display: 'flex',
 		flexFlow: 'row',
 		//justifyContent: 'space-between',
 		alignItems: 'center',
-		// padding: 8
+		// padding: 4
 	},
 	editInput: {
 		//width: 100

@@ -3,12 +3,11 @@ import { useEffect, useState } from 'react';
 import { Button, CircularProgress } from '@mui/material';
 import { styles } from './styles';
 import { useMutation, gql } from '@apollo/client';
-
 interface Props {
 	nodeId: number;
-	moduleId: number;
+	index: number;
 }
-export const ScaleControl: React.FC<Props> = ({ nodeId, moduleId }) => {
+export const ScaleControl: React.FC<Props> = ({ nodeId, index }) => {
 	const TARE_SCALE = gql`
 		mutation TareScale($index: Int, $nodeId: Int) {
 			tareScale(index: $index, nodeId: $nodeId) {
@@ -21,7 +20,6 @@ export const ScaleControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 	const [showProgress, setShowProgress] = useState(false);
 	const [tareScale, { loading }] = useMutation(TARE_SCALE, {
 		onCompleted(data) {
-			debugger;
 			setShowProgress(false);
 		},
 		onError: err => {
@@ -35,7 +33,7 @@ export const ScaleControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 	const onHandleTare = () => {
 		tareScale({
 			variables: {
-				index: moduleId,
+				index: index,
 				nodeId: nodeId,
 			},
 		});

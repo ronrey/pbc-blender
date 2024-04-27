@@ -6,14 +6,12 @@ export const styles = createStyles({
 		margin: 4,
 		padding: 8,
 	},
-
 	progress: {
 		zIndex: 2,
 		position: 'fixed',
 		top: '50%',
 		left: '50%',
 	},
-
 	button: {
 		marginRight: 8,
 	},

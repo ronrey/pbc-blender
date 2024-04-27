@@ -5,13 +5,12 @@ import { styles } from './styles';
 import { useMutation, gql } from '@apollo/client';
 interface Props {
 	nodeId: number;
-	moduleId: number;
+	index: number;
 }
-
-export const FeedControl: React.FC<Props> = ({ nodeId, moduleId }) => {
+export const FeedControl: React.FC<Props> = ({ nodeId, index }) => {
 	const FEED = gql`
-		mutation feed($grams: Float) {
-			feed(nodeId: nodeId, moduleId: moduleId, grams: $grams) {
+		mutation feed($index: Int, $nodeId: Int, $grams: Float) {
+			feed(index: $index, nodeId: $nodeId, grams: $grams) {
 				success
 				code
 				message
@@ -19,8 +18,8 @@ export const FeedControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 		}
 	`;
 	const START_FEED = gql`
-		mutation StartFeed {
-			startFeed(moduleId: moduleId, nodeId: nodeId) {
+		mutation StartFeed($index: Int, $nodeId: Int) {
+			startFeed(index: $index, nodeId: $nodeId) {
 				success
 				code
 				message
@@ -28,8 +27,8 @@ export const FeedControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 		}
 	`;
 	const STOP_FEED = gql`
-		mutation StopFeed {
-			stopFeed(moduleId: moduleId, nodeId: nodeId) {
+		mutation StopFeed($index: Int, $nodeId: Int) {
+			stopFeed(index: $index, nodeId: $nodeId) {
 				success
 				code
 				message
@@ -59,30 +58,41 @@ export const FeedControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 
 	const [feed, { loading }] = useMutation(FEED, {
 		onCompleted(data) {
-			console.log(data);
 			setShowProgress(false);
 		},
 		onError: err => {
 			setShowProgress(false);
 			debugger;
+			setShowProgress(false);
 		},
 	});
 
 	const onHandleStart = () => {
-		startFeed();
+		startFeed({
+			variables: {
+				index: index,
+				nodeId: nodeId,
+			},
+		});
 	};
 	const onHandleStop = () => {
-		stopFeed();
+		stopFeed({
+			variables: {
+				index: index,
+				nodeId: nodeId,
+			},
+		});
 	};
 	const onHandleFeed = () => {
 		console.log(`onHandleFeed nodeId: ${nodeId} grams: ${grams}`);
 		feed({
 			variables: {
 				grams: grams,
+				index: index,
+				nodeId: nodeId,
 			},
 		});
 	};
-
 	useEffect(() => {
 		if (loading) setShowProgress(true);
 	}, [loading]);
@@ -115,7 +125,6 @@ export const FeedControl: React.FC<Props> = ({ nodeId, moduleId }) => {
 						feed
 					</Button>
 				</div>
-
 				<div css={styles.onOffContainer}>
 					<Button
 						variant="contained"

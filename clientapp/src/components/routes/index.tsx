@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import { BlenderControls } from '../blenderControls';
-import HexagonDrawing from '../blender/render';
 import { Modules } from '../modules';
 import { Home } from '../home';
 interface Props {}
@@ -9,7 +8,6 @@ export const AppRoutes: React.FC<Props> = () => {
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/controls" element={<BlenderControls />} />
-			<Route path="/render" element={<HexagonDrawing size={500} />} />
 			<Route path="/modules" element={<Modules />} />
 		</Routes>
 	);
