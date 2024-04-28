@@ -9,7 +9,7 @@ export const Mutation = {
 		return await getBlender().blend(args.blend);
 	},
 	stop: async () => {
-		return { success: true, code: '200', message: 'stop' };
+		return await getBlender().stop();
 	},
 	stopModule: async (_: null, args: { index: number }) => {
 		return getModuleByNumber(args.index).stop();

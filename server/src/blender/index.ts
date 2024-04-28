@@ -44,6 +44,13 @@ class Blender {
 		}
 		return { success: true, code: 200, message: 'Blend successful' };
 	}
+	public async stop() {
+		const results = await Promise.all(this.modules.map(m => m.module.stop()));
+		if (results.some(result => !result.success)) {
+			return { success: false, code: 400, message: 'One or more modules failed to stop' };
+		}
+		return { success: true, code: 200, message: 'All modules stopped' };
+	}
 }
 let blender: Blender | null = null;
 export function getBlender() {

@@ -21,7 +21,6 @@ const Bar: React.FC<BarProps> = ({ percentage, color = 'saddlebrown' }) => {
 		bottom: 0,
 		width: '82%',
 		height: `${percentage}%`,
-		//	marginTop: 'auto',
 		marginBottom: 2, //'auto',
 		marginLeft: '2%', //'auto',
 		backgroundColor: color,
@@ -39,7 +38,7 @@ export const VerticalBar: React.FC<VerticalBarProps> = ({ percentage, grams, sho
 		<Paper elevation={4} css={styles.barContainer}>
 			<div css={styles.values}>
 				<Typography css={styles.percentage}>{percentage.toFixed(0)}%</Typography>
-				<Typography css={styles.grams}>{grams.toFixed(0)} g</Typography>
+				<Typography css={styles.grams}>{grams.toFixed(1)} g</Typography>
 			</div>
 			{percentage < 5 ? <Typography css={styles.empty}>empty</Typography> : null}
 			{percentage > 5 ? <Bar percentage={percent} color={color} /> : null}
