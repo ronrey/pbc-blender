@@ -9,16 +9,18 @@ interface Props {
 	index: number;
 }
 export const Module: React.FC<Props> = ({ index }) => {
-	const STOP = gql`
-		mutation stopAll {
-			stopAll {
+	const STOP_MODULE = gql`
+		mutation StopModule {
+			stopModule(index: ${index}) {
 				code
+				message
+				success
 			}
 		}
 	`;
 	const GET_SERVER_NAME = gql`
-		query getServerName($index: Int) {
-			getServerName(index: $index)
+		query getServerName{
+			getServerName(index: ${index})
 		}
 	`;
 	const [serverName, setServerName] = useState('');
@@ -32,7 +34,7 @@ export const Module: React.FC<Props> = ({ index }) => {
 			debugger;
 		},
 	});
-	const [stop] = useMutation(STOP, {
+	const [stopModule] = useMutation(STOP_MODULE, {
 		onCompleted(data) {
 			console.log(`stopped, data:${data}`);
 		},
@@ -41,11 +43,11 @@ export const Module: React.FC<Props> = ({ index }) => {
 		},
 	});
 	useEffect(() => {
-		getServerName({ variables: { index: index } });
+		getServerName();
 	}, [getServerName, index]);
 	function callStop() {
-		console.log('callStop');
-		stop();
+		console.log(`stopping module ${index}`);
+		stopModule();
 	}
 	function renderStations() {
 		return (

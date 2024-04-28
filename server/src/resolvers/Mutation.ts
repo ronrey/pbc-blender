@@ -11,6 +11,9 @@ export const Mutation = {
 	stop: async () => {
 		return { success: true, code: '200', message: 'stop' };
 	},
+	stopModule: async (_: null, args: { index: number }) => {
+		return getModuleByNumber(args.index).stop();
+	},
 	stopFeed: async (_: null, args: { index: number; nodeId: number }) => {
 		return getModuleByNumber(args.index).stopFeed(args.nodeId);
 	},

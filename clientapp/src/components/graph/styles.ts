@@ -5,23 +5,22 @@ export const styles = createStyles({
 		fontFamily: 'SFBold',
 	},
 	percentage: {
-		fontSize: '1.0rem',
+		fontSize: '.90rem',
 		//fontFamily: 'SFBold',
 	},
 	grams: {
-		fontSize: '1.0rem',
+		fontSize: '.90rem',
 		//fontFamily: 'SFBold',
 	},
 	barContainer: {
-		width: '90%',
-		height: '150px',
-		border: '1px solid gray',
+		width: '80%',
+		height: '120px',
 		position: 'relative',
 		margin: 'auto',
 	},
 	bar: {
 		padding: 8,
-		margin: '1%',
+		//	margin: '1%',
 	},
 	values: {
 		display: 'flex',

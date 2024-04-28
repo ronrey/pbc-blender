@@ -91,19 +91,20 @@ export const GateControl: React.FC<Props> = ({ nodeId, index }) => {
 	return (
 		<Paper elevation={4} css={styles.container}>
 			{showProgress && <CircularProgress css={styles.progress} />}
-			<Typography css={styles.controlTitle}>Gate</Typography>
-			<div css={styles.onOffContainer}>
+			<div css={styles.gateContainer}>
+				<Typography css={styles.controlTitle}>Gate</Typography>
 				<Button
 					variant="contained"
 					size="small"
-					color="primary"
-					css={styles.button}
+					color="secondary"
 					onClick={() => {
 						onHandleCycle();
 					}}
 				>
 					cycle
 				</Button>
+			</div>
+			<div css={styles.onOffContainer}>
 				<Button
 					variant="contained"
 					size="small"

@@ -26,6 +26,18 @@ const coffeeList = [
 	{ value: 3, display: 'mod 2 - node 1' },
 	{ value: 4, display: 'mod 2 - node 2' },
 	{ value: 5, display: 'mod 2 - node 3' },
+	{ value: 6, display: 'mod 3 - node 1' },
+	{ value: 7, display: 'mod 3 - node 2' },
+	{ value: 8, display: 'mod 3 - node 3' },
+	{ value: 9, display: 'mod 4 - node 1' },
+	{ value: 10, display: 'mod 4 - node 2' },
+	{ value: 11, display: 'mod 4 - node 3' },
+	{ value: 12, display: 'mod 5 - node 1' },
+	{ value: 13, display: 'mod 5 - node 2' },
+	{ value: 14, display: 'mod 5 - node 3' },
+	{ value: 15, display: 'mod 6 - node 1' },
+	{ value: 16, display: 'mod 6 - node 2' },
+	{ value: 17, display: 'mod 6 - node 3' },
 ];
 export const BlendList: React.FC<Props> = ({ list, onChange, title }) => {
 	const [edit, setEdit] = useState<BlendItem>({ ...protoBlend });

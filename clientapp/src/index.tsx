@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { grey, blue, brown, red } from '@mui/material/colors';
+import { grey, blue, brown, red, green } from '@mui/material/colors';
 import useConfig from './components/hooks/useConfig';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -29,10 +29,10 @@ const theme = createTheme({
 			contrastText: brown[100],
 		},
 		secondary: {
-			main: brown[800],
-			light: brown[800],
-			dark: brown[800],
-			contrastText: blue[800],
+			main: green[800],
+			light: green[800],
+			dark: green[800],
+			contrastText: 'white',
 		},
 		background: {
 			//	default: blue[900],

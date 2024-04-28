@@ -57,7 +57,7 @@ export const styles = createStyles({
 		display: 'flex',
 		flexFlow: 'column',
 	},
-	input: { marginRight: 8, width: 80 },
+	input: { marginRight: 8, width: 52 },
 	controlText: {
 		fontSize: '.9rem',
 		textAlign: 'center',
@@ -87,5 +87,12 @@ export const styles = createStyles({
 	buttons: {
 		display: 'flex',
 		justifyContent: 'right',
+	},
+	gateContainer: {
+		display: 'flex',
+		flexFlow: 'row wrap',
+		//padding: 4,
+		//margin: 'auto',
+		justifyContent: 'space-between',
 	},
 });

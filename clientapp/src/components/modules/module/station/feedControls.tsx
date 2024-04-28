@@ -110,14 +110,14 @@ export const FeedControl: React.FC<Props> = ({ nodeId, index }) => {
 						css={styles.input}
 						value={grams}
 						onChange={handleGramChange}
-						inputProps={{ min: '.1', max: '500', step: '.1' }}
+						inputProps={{ min: '1', max: '500', step: '10' }}
 					/>
-					<div css={styles.controlText}>grams</div>
+					<div css={styles.controlText}>g</div>
 					<Button
 						css={styles.feedButton}
 						variant="contained"
 						size="small"
-						color="primary"
+						color="secondary"
 						onClick={() => {
 							onHandleFeed();
 						}}

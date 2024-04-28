@@ -37,6 +37,7 @@ export interface ModuleInterface {
 	openGate(nodeId: number): Promise<Status>;
 	closeGate(nodeId: number): Promise<Status>;
 	cycleGate(nodeId: number): Promise<Status>;
+	stop(): Promise<Status>;
 }
 export type StationId = [number, number];
 export class Module {
@@ -78,6 +79,22 @@ export class Module {
 		logger.info('endpoint', this.endpoint);
 		logger.info('serverName', serverName);
 		return serverName.getServerName;
+	}
+	async stop(): Promise<Status> {
+		console.log(`stop: ${this.endpoint}`);
+		const response: { stopAll: Status } = await request(
+			this.endpoint,
+			gql`
+				mutation StopAll {
+					stopAll {
+						code
+						success
+						message
+					}
+				}
+			`
+		);
+		return response.stopAll;
 	}
 	async getScaleReading(nodeId: number): Promise<number> {
 		const variables = {

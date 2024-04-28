@@ -29,6 +29,7 @@ export const typeDefs = gql`
 	}
 	type Mutation {
 		stop: Status
+		stopModule(index: Int): Status
 		blend(blend: [BlendItemInput]): Status
 		stopFeed(index: Int, nodeId: Int): Status
 		startFeed(index: Int, nodeId: Int): Status

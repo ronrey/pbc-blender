@@ -12,9 +12,11 @@ export interface BlendItem {
 }
 export const Modules: React.FC<Props> = () => {
 	const STOP = gql`
-		mutation stopAll {
-			stopAll {
+		mutation Stop {
+			stop {
 				code
+				success
+				message
 			}
 		}
 	`;
@@ -30,19 +32,13 @@ export const Modules: React.FC<Props> = () => {
 		console.log('callStopAll');
 		stop();
 	}
-	function renderState() {
-		return <div css={styles.stateContainer}></div>;
-	}
+
 	function renderModules() {
 		const mods = [];
 		for (let index = 0; index < 6; index++) {
-			mods.push(<Module index={index} />);
+			mods.push(<Module index={index} key={index} />);
 		}
-		return (
-			<div css={styles.container}>
-				<div css={styles.controlContainer}>{mods}</div>
-			</div>
-		);
+		return <div css={styles.moduleContainer}>{mods}</div>;
 	}
 	return (
 		<div css={styles.container}>
@@ -58,7 +54,6 @@ export const Modules: React.FC<Props> = () => {
 			>
 				Emergency Stop
 			</Button>
-			{renderState()}
 			{renderModules()}
 		</div>
 	);

@@ -63,6 +63,7 @@ export const BlenderControls: React.FC<Props> = () => {
 		return <div css={styles.controlContainer}>{renderBlendControl()}</div>;
 	}
 	function onListChange(list: BlendItem[]) {
+		debugger;
 		setBlendList(list);
 	}
 	function renderBlendControl() {

@@ -1,6 +1,6 @@
 import { createStyles } from '../emotion-styles';
 export const styles = createStyles({
-	stateContainer: {
+	moduleContainer: {
 		display: 'flex',
 		flexFlow: 'row wrap',
 		padding: 4,
@@ -15,6 +15,8 @@ export const styles = createStyles({
 	container: {
 		display: 'flex',
 		flexFlow: 'column',
+		// justifyContent: 'center',
+		// alignItems: 'center',
 	},
 	stopButton: {
 		width: '80%',
