@@ -8,7 +8,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
 interface Props {}
 
@@ -47,7 +46,7 @@ export const Module: React.FC<Props> = () => {
 	}
 	return (
 		<div css={styles.container}>
-			<MenuBar dept="home" />
+			<MenuBar dept="module" />
 			{RowRadioButtonsGroup()}
 			<div css={styles.container}>
 				<iframe
