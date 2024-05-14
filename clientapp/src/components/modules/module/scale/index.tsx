@@ -40,11 +40,12 @@ export const Scale: React.FC<Props> = ({ index, nodeId }) => {
 		}, REFRESH_RATE_VALUES);
 		return () => clearInterval(interval);
 	}, [fetchGrams, nodeId]);
+
 	return (
 		<Paper elevation={4} css={styles.container}>
 			<Typography css={styles.nodeId}>Scale</Typography>
 			<VerticalBar grams={grams} percentage={(grams / FULL_WEIGHT_GRAMS) * 100} />
-			<ScaleControl nodeId={nodeId} index={index} />
+			{/* <ScaleControl nodeId={nodeId} index={index} /> */}
 		</Paper>
 	);
 };

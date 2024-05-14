@@ -1,4 +1,6 @@
 import { createStyles } from '../emotion-styles';
+import { grey } from '@mui/material/colors';
+
 export const styles = createStyles({
 	title: {
 		margin: 'auto',
@@ -30,6 +32,7 @@ export const styles = createStyles({
 	container: {
 		display: 'flex',
 		flexFlow: 'column',
+		backgroundColor: grey[800],
 	},
 	stopButton: {
 		width: '80%',

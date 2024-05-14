@@ -1,3 +1,4 @@
+import { grey } from '@mui/material/colors';
 import { createStyles } from '../../emotion-styles';
 export const styles = createStyles({
 	title: {
@@ -17,6 +18,7 @@ export const styles = createStyles({
 		margin: 'auto ',
 		padding: 4,
 		marginTop: 8,
+		backgroundColor: grey[800],
 	},
 	stopButton: {
 		width: '80%',

@@ -1,3 +1,4 @@
+import { grey } from '@mui/material/colors';
 import { createStyles } from '../emotion-styles';
 export const styles = createStyles({
 	moduleContainer: {
@@ -15,6 +16,7 @@ export const styles = createStyles({
 	container: {
 		display: 'flex',
 		flexFlow: 'column',
+		backgroundColor: grey[800],
 		// justifyContent: 'center',
 		// alignItems: 'center',
 	},

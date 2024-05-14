@@ -47,7 +47,7 @@ export const Silo: React.FC<Props> = ({ index, nodeId }) => {
 		<Paper elevation={4} css={styles.container}>
 			<Typography css={styles.nodeId}>Silo</Typography>
 			<VerticalBar showColor={true} grams={grams} percentage={(grams / SILO_FULL_WEIGHT_GRAMS) * 100} />
-			<SiloControl nodeId={nodeId} index={index} />
+			{/* <SiloControl nodeId={nodeId} index={index} /> */}
 		</Paper>
 	);
 };

@@ -14,7 +14,7 @@ export const styles = createStyles({
 	},
 	barContainer: {
 		width: '80%',
-		height: '120px',
+		height: 100,
 		position: 'relative',
 		margin: 'auto',
 	},

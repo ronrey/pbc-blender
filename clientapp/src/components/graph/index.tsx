@@ -26,11 +26,10 @@ const Bar: React.FC<BarProps> = ({ percentage, color = 'saddlebrown' }) => {
 		backgroundColor: color,
 		borderRadius: '0 0 6px 6px',
 	};
-
 	return percentage ? <div css={styles.bar} style={barStyle}></div> : null;
 };
 
-export const VerticalBar: React.FC<VerticalBarProps> = ({ percentage, grams, showColor = false }) => {
+export const VerticalBar: React.FC<VerticalBarProps> = ({ percentage, grams, showColor = true }) => {
 	const percent = percentage > 100 ? 100 : percentage < 0 ? 0 : percentage;
 	const color = showColor ? (percentage >= 100 ? 'red' : 'saddlebrown') : 'transparent';
 
@@ -40,8 +39,8 @@ export const VerticalBar: React.FC<VerticalBarProps> = ({ percentage, grams, sho
 				<Typography css={styles.percentage}>{percentage.toFixed(0)}%</Typography>
 				<Typography css={styles.grams}>{grams.toFixed(1)} g</Typography>
 			</div>
-			{percentage < 5 ? <Typography css={styles.empty}>empty</Typography> : null}
-			{percentage > 5 ? <Bar percentage={percent} color={color} /> : null}
+			{percentage < 3 ? <Typography css={styles.empty}>empty</Typography> : null}
+			{percentage > 2 ? <Bar percentage={percent} color={color} /> : null}
 		</Paper>
 	);
 };

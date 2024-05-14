@@ -42,7 +42,7 @@ export const SiloControl: React.FC<Props> = ({ nodeId, index }) => {
 	return (
 		<div css={styles.container}>
 			{showProgress && <CircularProgress css={styles.progress} />}
-			<div css={styles.buttons}>
+			{/* <div css={styles.buttons}>
 				<Button
 					variant="contained"
 					color="primary"
@@ -54,7 +54,7 @@ export const SiloControl: React.FC<Props> = ({ nodeId, index }) => {
 				>
 					reset tare
 				</Button>
-			</div>
+			</div> */}
 		</div>
 	);
 };

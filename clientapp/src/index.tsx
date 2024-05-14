@@ -21,32 +21,31 @@ const authLink = setContext((_, { headers }) => {
 });
 const theme = createTheme({
 	palette: {
-		//mode: "dark",
+		mode: 'dark',
 		primary: {
 			main: '#0c80bc',
 			light: blue[100],
-			dark: blue[800],
-			contrastText: brown[100],
+			dark: 'black',
+			contrastText: grey[50],
 		},
 		secondary: {
 			main: green[800],
 			light: green[800],
-			dark: green[800],
-			contrastText: 'white',
+			dark: grey[800],
+			contrastText: grey[50],
 		},
 		background: {
-			//	default: blue[900],
-			paper: '#d7d0c8',
-			// paper: "#d1d5c5",
+			default: grey[800],
+			paper: grey[800], // Dark background color for paper surfaces
 		},
 		text: {
-			primary: grey[900],
-			secondary: grey[900],
+			primary: grey[100],
+			secondary: grey[100],
 		},
 		error: {
 			main: red[900],
 			light: red[900],
-			dark: red[900],
+			//   dark: red[900],
 			contrastText: grey[50],
 		},
 		common: {
@@ -54,8 +53,19 @@ const theme = createTheme({
 			white: grey[50],
 		},
 	},
+	// components: {
+	// 	MuiPaper: {
+	// 		styleOverrides: {
+	// 			root: {
+	// 				//	padding: '16px',
+	// 				//	backgroundColor: '#1e1e1e',
+	// 				//	borderRadius: '8px',
+	// 				//	boxShadow: `0px 2px 4px ${grey[600]}`,
+	// 			},
+	// 		},
+	// 	},
+	// },
 	typography: {
-		//fontSize: 12,
 		fontFamily: ['SFRegular'].join(','),
 	},
 });

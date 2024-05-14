@@ -201,9 +201,9 @@ export const MenuBar: React.FC<Props> = ({ dept, title }) => {
 				{/* <ShoppingCartButton /> */}
 			</div>
 
-			<Typography css={styles.title} color="primary">
+			{/* <Typography css={styles.title} color="primary">
 				{title ? title : dept}
-			</Typography>
+			</Typography> */}
 		</div>
 	);
 };
