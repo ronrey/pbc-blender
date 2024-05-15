@@ -97,21 +97,20 @@ export const MenuBar: React.FC<Props> = ({ dept, title }) => {
 							<Button
 								css={styles.button}
 								size="small"
-								onClick={() => navagate('/modules')}
-								color="primary"
-								variant="contained"
-							>
-								{text.menubar.buttonModules}
-							</Button>
-
-							<Button
-								css={styles.button}
-								size="small"
 								onClick={() => navagate('/controls')}
 								color="primary"
 								variant="contained"
 							>
 								{text.menubar.buttonControls}
+							</Button>
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/modules')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.buttonModules}
 							</Button>
 						</ButtonGroup>
 					</div>

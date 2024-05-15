@@ -1,11 +1,11 @@
 const text = {
 	menubar: {
-		buttonModules: 'Modules',
-		buttonControls: 'Controls',
+		buttonModules: 'General',
+		buttonControls: 'Blend',
 		buttonHome: 'Home',
-		buttonModule: 'Module',
-		titleModules: 'Modules',
-		titleModule: 'Module',
+		buttonModule: 'Modules',
+		titleModules: 'General',
+		titleModule: 'Modules',
 		titleCustom: 'Custom',
 		titleBlends: 'Blends',
 		titleHistory: 'History',

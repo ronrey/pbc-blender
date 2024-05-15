@@ -4,7 +4,6 @@ import { Typography, Paper } from '@mui/material';
 import { styles } from './styles';
 import { useLazyQuery, gql } from '@apollo/client';
 import { VerticalBar } from '../../../graph';
-import { ScaleControl } from './controls';
 interface Props {
 	index: number;
 	nodeId: number;
@@ -42,10 +41,9 @@ export const Scale: React.FC<Props> = ({ index, nodeId }) => {
 	}, [fetchGrams, nodeId]);
 
 	return (
-		<Paper elevation={4} css={styles.container}>
-			<Typography css={styles.nodeId}>Scale</Typography>
+		<Paper css={styles.container} variant="outlined">
+			<Typography variant="h4">Scale</Typography>
 			<VerticalBar grams={grams} percentage={(grams / FULL_WEIGHT_GRAMS) * 100} />
-			{/* <ScaleControl nodeId={nodeId} index={index} /> */}
 		</Paper>
 	);
 };

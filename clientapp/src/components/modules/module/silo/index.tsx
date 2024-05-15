@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useCallback, useEffect, useState } from 'react';
-import { Typography, Paper, Button } from '@mui/material';
+import { Typography, Paper } from '@mui/material';
 import { styles } from './styles';
-import { useLazyQuery, gql, useMutation } from '@apollo/client';
+import { useLazyQuery, gql } from '@apollo/client';
 import { VerticalBar } from '../../../graph';
-import { SiloControl } from './controls';
 interface Props {
 	index: number;
 	nodeId: number;
@@ -38,16 +37,14 @@ export const Silo: React.FC<Props> = ({ index, nodeId }) => {
 	);
 	useEffect(() => {
 		const interval = setInterval(() => {
-			//	debugger;
 			fetchGrams(nodeId);
 		}, REFRESH_RATE_VALUES);
 		return () => clearInterval(interval);
 	}, [fetchGrams, nodeId]);
 	return (
-		<Paper elevation={4} css={styles.container}>
-			<Typography css={styles.nodeId}>Silo</Typography>
+		<Paper css={styles.container} variant="outlined">
+			<Typography variant="h4">Silo</Typography>
 			<VerticalBar showColor={true} grams={grams} percentage={(grams / SILO_FULL_WEIGHT_GRAMS) * 100} />
-			{/* <SiloControl nodeId={nodeId} index={index} /> */}
 		</Paper>
 	);
 };

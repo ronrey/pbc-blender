@@ -53,20 +53,49 @@ const theme = createTheme({
 			white: grey[50],
 		},
 	},
-	// components: {
-	// 	MuiPaper: {
-	// 		styleOverrides: {
-	// 			root: {
-	// 				//	padding: '16px',
-	// 				//	backgroundColor: '#1e1e1e',
-	// 				//	borderRadius: '8px',
-	// 				//	boxShadow: `0px 2px 4px ${grey[600]}`,
-	// 			},
-	// 		},
-	// 	},
-	// },
+	components: {
+		MuiPaper: {
+			styleOverrides: {
+				root: ({ theme }) => ({
+					//	padding: '16px',
+					backgroundColor: theme.palette.mode === 'dark' ? grey[700] : grey[200],
+					borderRadius: '12px',
+					boxShadow:
+						theme.palette.mode === 'dark'
+							? '0 4px 12px rgba(0, 0, 0, 0.3)'
+							: '0 4px 12px rgba(0, 0, 0, 0.1)',
+					border: theme.palette.mode === 'dark' ? `1px solid ${grey[600]}` : `1px solid ${grey[300]}`,
+				}),
+			},
+		},
+	},
 	typography: {
-		fontFamily: ['SFRegular'].join(','),
+		//fontFamily: ['SFRegular'].join(','),
+		fontFamily: 'SFRegular Roboto, Arial, sans-serif',
+		h1: {
+			fontSize: '1.5rem',
+			fontFamily: 'SFBold',
+			lineHeight: 1.2,
+			letterSpacing: '0.1em',
+			color: grey[50], // Custom color for h1
+			textAlign: 'center',
+		},
+		h4: {
+			fontSize: '1.25rem',
+			//  fontFamily: 'SFRegular',
+			lineHeight: 1.2,
+			//   letterSpacing: '0.1em',
+			color: grey[50], // Custom color for h1
+			textAlign: 'center',
+		},
+		h6: {
+			fontSize: '1.1rem',
+			//  fontFamily: 'SFRegular',
+			lineHeight: 1.5,
+			//   letterSpacing: '0.1em',
+			color: grey[50], // Custom color for h1
+			//     textAlign: 'center',
+		},
 	},
 });
 

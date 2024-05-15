@@ -51,7 +51,7 @@ export const Module: React.FC<Props> = ({ index }) => {
 	}
 	function renderStations() {
 		return (
-			<Paper elevation={4} css={styles.stateContainer}>
+			<Paper css={styles.stateContainer} variant="outlined">
 				<Station index={index} nodeId={0} />
 				<Station index={index} nodeId={1} />
 				<Station index={index} nodeId={2} />
@@ -59,7 +59,7 @@ export const Module: React.FC<Props> = ({ index }) => {
 		);
 	}
 	return (
-		<Paper elevation={4} css={styles.container}>
+		<Paper css={styles.container} variant="outlined">
 			<Typography css={styles.title}>{serverName}</Typography>
 			<Button
 				css={styles.stopButton}

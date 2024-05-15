@@ -18,7 +18,6 @@ export const styles = createStyles({
 		margin: 'auto ',
 		padding: 4,
 		marginTop: 8,
-		backgroundColor: grey[800],
 	},
 	stopButton: {
 		width: '80%',
