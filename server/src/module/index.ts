@@ -3,7 +3,7 @@ import { Status } from '../types';
 import { moduleUrls } from '../blender/settings';
 import logger from '../winston';
 const GET_GRAMS = gql`
-	mutation Feed($nodeId: Int, $grams: Float) {
+	mutation GetGrams($nodeId: Int, $grams: Float) {
 		feed(nodeId: $nodeId, grams: $grams) {
 			code
 			message
