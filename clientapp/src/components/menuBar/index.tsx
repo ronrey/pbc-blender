@@ -43,6 +43,15 @@ export const MenuBar: React.FC<Props> = ({ dept, title }) => {
 							>
 								{text.menubar.buttonModule}
 							</Button>
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/coffeemapping')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.coffeeMappingModules}
+							</Button>
 						</ButtonGroup>
 					</div>
 				);
@@ -78,6 +87,15 @@ export const MenuBar: React.FC<Props> = ({ dept, title }) => {
 							>
 								{text.menubar.buttonModule}
 							</Button>
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/coffeemapping')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.coffeeMappingModules}
+							</Button>
 						</ButtonGroup>
 					</div>
 				);
@@ -112,10 +130,63 @@ export const MenuBar: React.FC<Props> = ({ dept, title }) => {
 							>
 								{text.menubar.buttonModules}
 							</Button>
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/coffeemapping')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.coffeeMappingModules}
+							</Button>
 						</ButtonGroup>
 					</div>
 				);
 			case 'home':
+				return (
+					<div css={styles.buttons}>
+						<ButtonGroup aria-label="button group">
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/modules')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.buttonModules}
+							</Button>
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/controls')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.buttonControls}
+							</Button>
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/module')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.buttonModule}
+							</Button>
+							<Button
+								css={styles.button}
+								size="small"
+								onClick={() => navagate('/coffeemapping')}
+								color="primary"
+								variant="contained"
+							>
+								{text.menubar.coffeeMappingModules}
+							</Button>
+						</ButtonGroup>
+					</div>
+				);
+
+			case 'coffeeMapping':
 				return (
 					<div css={styles.buttons}>
 						<ButtonGroup aria-label="button group">

@@ -1,4 +1,8 @@
+import { get } from 'lodash';
 import { getModuleByNumber } from '../module';
+import { getBlender } from '../blender';
+import { Production, getProduction } from '../production';
+
 export const Query = {
 	status: async (_: null) => {
 		return { success: true, code: '200', message: 'status' };
@@ -33,6 +37,17 @@ export const Query = {
 	},
 	getSiloBaseline: async (_: null, args: { index: number; nodeId: number }) => {
 		return getModuleByNumber(args.index).getSiloBaseline(args.nodeId);
+	},
+	getCoffeeMap: async () => {
+		const blender = getBlender();
+		return await blender.getCoffeeMap();
+	},
+	getCoffeeByKey: async (_: null, args: { key: number }) => {
+		console.log('getCoffeeByKey', args.key);
+		return await getProduction().getCoffeeByKey(args.key);
+	},
+	getCoffees: async () => {
+		return await getProduction().getCoffees();
 	},
 };
 export default Query;

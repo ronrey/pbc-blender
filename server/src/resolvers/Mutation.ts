@@ -3,7 +3,8 @@ import { getModuleByNumber } from '../module';
 import { getBlender } from '../blender';
 import { blendItem } from '../types/blender';
 import logger from '../winston';
-
+import { set } from 'lodash';
+import { CoffeeModule } from '../types';
 export const Mutation = {
 	blend: async (_: null, args: { blend: blendItem[] }) => {
 		return await getBlender().blend(args.blend);
@@ -39,6 +40,19 @@ export const Mutation = {
 	},
 	cycleGate: async (_: null, args: { index: number; nodeId: number }) => {
 		return getModuleByNumber(args.index).cycleGate(args.nodeId);
+	},
+	setCoffeeMap: async (_: null, args: { coffeeModules: CoffeeModule[] }) => {
+		const blender = getBlender();
+		const coffeeToModules = args.coffeeModules.map(cm => {
+			return {
+				coffeeId: cm.coffeeId,
+				moduleId: cm.moduleId,
+				stationId: cm.stationId,
+			};
+		});
+		logger.debug('Setting coffee to modules');
+		const status = await blender.setCoffeeMap(coffeeToModules);
+		return status;
 	},
 };
 export default Mutation;

@@ -1,6 +1,7 @@
 const text = {
 	menubar: {
 		buttonModules: 'General',
+		coffeeMappingModules: 'Mapping',
 		buttonControls: 'Blend',
 		buttonHome: 'Home',
 		buttonModule: 'Modules',
