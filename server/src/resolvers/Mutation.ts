@@ -1,10 +1,9 @@
 import { getModuleByNumber } from '../module';
 
 import { getBlender } from '../blender';
-import { blendItem } from '../types/blender';
 import logger from '../winston';
 import { set } from 'lodash';
-import { CoffeeModule } from '../types';
+import { CoffeeModule, blendItem } from '../types';
 export const Mutation = {
 	blend: async (_: null, args: { blend: blendItem[] }) => {
 		return await getBlender().blend(args.blend);
@@ -45,6 +44,7 @@ export const Mutation = {
 		const blender = getBlender();
 		const coffeeToModules = args.coffeeModules.map(cm => {
 			return {
+				state: cm.state,
 				coffeeId: cm.coffeeId,
 				moduleId: cm.moduleId,
 				stationId: cm.stationId,

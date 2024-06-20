@@ -21,12 +21,14 @@ export const typeDefs = gql`
 		coffeeId: Int!
 		moduleId: Int!
 		stationId: Int!
+		state: String!
 	}
 
 	input CoffeeModuleInput {
 		coffeeId: Int!
 		moduleId: Int!
 		stationId: Int!
+		state: String!
 	}
 	type Coffee {
 		_id: ID

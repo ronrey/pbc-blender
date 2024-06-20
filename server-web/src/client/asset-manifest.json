@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a05bda5b.css",
-    "main.js": "/static/js/main.f7634125.js",
+    "main.css": "/static/css/main.b7bb0fc2.css",
+    "main.js": "/static/js/main.482bc515.js",
     "static/js/787.94030ec6.chunk.js": "/static/js/787.94030ec6.chunk.js",
     "static/media/Display-Heavy.otf": "/static/media/Display-Heavy.481707abb5ccb95260af.otf",
     "static/media/Display-Bold.otf": "/static/media/Display-Bold.922b6b74886716f67a6f.otf",
@@ -15,12 +15,12 @@
     "static/media/Text-RegularItalic.otf": "/static/media/Text-RegularItalic.195df6af4159da6abbb4.otf",
     "static/media/Gaitera_Ball-demo-FFP.ttf": "/static/media/Gaitera_Ball-demo-FFP.30f450759cfbe0008eb4.ttf",
     "index.html": "/index.html",
-    "main.a05bda5b.css.map": "/static/css/main.a05bda5b.css.map",
-    "main.f7634125.js.map": "/static/js/main.f7634125.js.map",
+    "main.b7bb0fc2.css.map": "/static/css/main.b7bb0fc2.css.map",
+    "main.482bc515.js.map": "/static/js/main.482bc515.js.map",
     "787.94030ec6.chunk.js.map": "/static/js/787.94030ec6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a05bda5b.css",
-    "static/js/main.f7634125.js"
+    "static/css/main.b7bb0fc2.css",
+    "static/js/main.482bc515.js"
   ]
 }

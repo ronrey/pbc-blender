@@ -2,58 +2,46 @@ import fs from 'fs';
 import path from 'path';
 import { Status } from '../types/';
 import { Module } from '../module';
-import { blendItem } from '../types/blender';
+import { blendItem } from '../types';
 import { moduleUrls } from './settings';
 import { CoffeeModule } from '../types';
 import coffeeMapData from './coffeeMap.json';
-
 interface moduleInterface {
 	moduleId: number;
 	module: Module;
 }
-
 export interface blenderInterface {
 	blend(blendItems: blendItem[]): Promise<Status>;
 	getCoffeeMap(): Promise<CoffeeModule[]>;
 	setCoffeeMap(coffeeToModules: CoffeeModule[]): Promise<Status>;
 	stop(): Promise<Status>;
 }
-
 export type StationPath = [number, number];
-
-class Blender {
+export class Blender {
 	private modules: moduleInterface[];
 	private coffeeToModules: CoffeeModule[] = coffeeMapData;
-
 	constructor() {
 		this.modules = moduleUrls.map((m, i) => {
 			return { moduleId: i, module: new Module(m) };
 		});
 	}
-
 	private GetPathByCoffeeId(coffeeId: number): StationPath | undefined {
-		const coffee: CoffeeModule | undefined = this.coffeeToModules.find(
-			(coffee: CoffeeModule) => coffee.coffeeId === coffeeId
-		);
+		const active = this.coffeeToModules.filter(coffee => coffee.state === 'active');
+		const coffee: CoffeeModule | undefined = active.find((coffee: CoffeeModule) => coffee.coffeeId === coffeeId);
 		if (!coffee) {
 			return undefined;
 		}
 		return [coffee.moduleId, coffee.stationId];
 	}
-
 	public async setCoffeeMap(coffeeToModules: CoffeeModule[]): Promise<Status> {
 		this.coffeeToModules = coffeeToModules;
-
 		const coffeeMapFilePath = path.join(__dirname, 'coffeeMap.json');
 		fs.writeFileSync(coffeeMapFilePath, JSON.stringify(coffeeToModules, null, 2));
-
 		return { success: true, code: 200, message: 'Coffee to modules set' };
 	}
-
 	public async getCoffeeMap(): Promise<CoffeeModule[]> {
 		return this.coffeeToModules;
 	}
-
 	public async blend(blendItems: blendItem[]): Promise<Status> {
 		const results = await Promise.all(
 			blendItems.map(async blendItem => {
@@ -66,13 +54,14 @@ class Blender {
 				return await module.feed(stationId, blendItem.grams);
 			})
 		);
-
+		if (!results) {
+			return { success: false, code: 400, message: 'blend failed' };
+		}
 		if (results.some(result => !result.success)) {
 			return { success: false, code: 400, message: 'One or more blends failed' };
 		}
 		return { success: true, code: 200, message: 'Blend successful' };
 	}
-
 	public async stop(): Promise<Status> {
 		const results = await Promise.all(this.modules.map(m => m.module.stop()));
 		if (results.some(result => !result.success)) {
@@ -81,9 +70,7 @@ class Blender {
 		return { success: true, code: 200, message: 'All modules stopped' };
 	}
 }
-
 let blender: Blender | null = null;
-
 export function getBlender(): Blender {
 	if (!blender) {
 		blender = new Blender();

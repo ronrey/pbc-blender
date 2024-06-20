@@ -8,6 +8,7 @@ export interface CoffeeModule {
 	coffeeId: number;
 	moduleId: number;
 	stationId: number;
+	state: string;
 }
 
 export interface Coffee {
@@ -30,3 +31,9 @@ export interface Coffee {
 	roast: string;
 	paragraphs: string[];
 }
+
+export interface blendItem {
+	coffeeId: number;
+	grams: number;
+}
+export type TwoNumberTuple = [number, number];

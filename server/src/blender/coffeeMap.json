@@ -1,90 +1,108 @@
 [
   {
-    "coffeeId": 12,
+    "state": "active",
+    "coffeeId": 14,
     "moduleId": 0,
     "stationId": 0
   },
   {
-    "coffeeId": 5,
+    "state": "active",
+    "coffeeId": 1,
     "moduleId": 0,
     "stationId": 1
   },
   {
-    "coffeeId": 2,
+    "state": "active",
+    "coffeeId": 1,
     "moduleId": 0,
     "stationId": 2
   },
   {
-    "coffeeId": 3,
+    "state": "active",
+    "coffeeId": 1,
     "moduleId": 1,
     "stationId": 0
   },
   {
-    "coffeeId": 4,
+    "state": "active",
+    "coffeeId": 1,
     "moduleId": 1,
     "stationId": 1
   },
   {
-    "coffeeId": 5,
+    "state": "active",
+    "coffeeId": 1,
     "moduleId": 1,
     "stationId": 2
   },
   {
+    "state": "active",
     "coffeeId": 6,
     "moduleId": 2,
     "stationId": 0
   },
   {
+    "state": "inactive",
     "coffeeId": 7,
     "moduleId": 2,
     "stationId": 1
   },
   {
+    "state": "inactive",
     "coffeeId": 8,
     "moduleId": 2,
     "stationId": 2
   },
   {
+    "state": "inactive",
     "coffeeId": 9,
     "moduleId": 3,
     "stationId": 0
   },
   {
+    "state": "inactive",
     "coffeeId": 10,
     "moduleId": 3,
     "stationId": 1
   },
   {
+    "state": "inactive",
     "coffeeId": 11,
     "moduleId": 3,
     "stationId": 2
   },
   {
+    "state": "inactive",
     "coffeeId": 12,
     "moduleId": 4,
     "stationId": 0
   },
   {
+    "state": "inactive",
     "coffeeId": 13,
     "moduleId": 4,
     "stationId": 1
   },
   {
+    "state": "inactive",
     "coffeeId": 14,
     "moduleId": 4,
     "stationId": 2
   },
   {
+    "state": "inactive",
     "coffeeId": 15,
     "moduleId": 5,
     "stationId": 0
   },
   {
+    "state": "inactive",
     "coffeeId": 16,
     "moduleId": 5,
     "stationId": 1
   },
   {
+    "state": "inactive",
     "coffeeId": 1,
     "moduleId": 5,
     "stationId": 2

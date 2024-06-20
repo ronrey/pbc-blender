@@ -2,6 +2,7 @@ export interface CoffeeMap {
 	coffeeId: number;
 	moduleId: number;
 	stationId: number;
+	state: string;
 }
 export interface Status {
 	success: boolean;
