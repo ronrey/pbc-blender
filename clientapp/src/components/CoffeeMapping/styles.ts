@@ -1,40 +1,21 @@
 import { createStyles } from '../emotion-styles';
 export const styles = createStyles({
-	title: {
-		margin: 'auto',
-		fontFamily: 'SFBold',
-		fontSize: '1.5rem',
-	},
-	titleContainer: {
-		margin: 'auto',
-		display: 'flex',
-	},
-
 	container: {
 		display: 'flex',
 		flexFlow: 'column',
-		margin: '8px auto',
-		maxWidth: 600,
-	},
-
-	InputAndButton: {
-		display: 'flex',
-		margin: `8px 0`,
-	},
-
-	input: { marginRight: 8, width: 80 },
-	controlText: {
-		fontSize: '.9rem',
-		textAlign: 'center',
-		paddingTop: 4,
-		marginRight: 8,
-	},
-
-	button: {
-		marginRight: 8,
+		//	width: '90%',
+		//	margin: '8px auto',
+		// maxWidth: 600,
 	},
 	buttonContainer: {
-		margin: '0 0 4px 0',
+		margin: '0 0 8px 0',
+		display: 'flex',
+		justifyContent: 'center',
+		flexFlow: 'column',
+	},
+	tableContainer: {
+		margin: 'auto',
+		width: '95%',
 	},
 	cellHeader: {
 		fontFamily: 'SFBold',
@@ -44,5 +25,17 @@ export const styles = createStyles({
 		fontFamily: 'SFBold',
 		fontSize: '1rem',
 		padding: '8px 4px 8px 4px',
+	},
+	header: {
+		display: 'flex',
+		flexFlow: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	saveButton: {
+		marginRight: '2.5%',
+		height: 32,
+		maxWidth: 200,
+		//margin: '0 0 8px 0',
 	},
 });

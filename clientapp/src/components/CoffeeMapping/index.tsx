@@ -17,6 +17,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { Button, Paper } from '@mui/material';
 import { CoffeeMap, Coffee } from '../../types';
+import { MenuBar } from '../menuBar';
+
 interface Props {}
 export const CoffeeMapping: React.FC<Props> = () => {
 	const SET_COFFEE_MAP = gql`
@@ -53,7 +55,6 @@ export const CoffeeMapping: React.FC<Props> = () => {
 			console.log(data.setCoffeeMap.success);
 		},
 		onError: err => {
-			//  setShowProgress(false);
 			debugger;
 		},
 	});
@@ -75,7 +76,6 @@ export const CoffeeMapping: React.FC<Props> = () => {
 			const coffees = data.getCoffees;
 			setCoffees(coffees);
 		},
-
 		onError: err => {
 			debugger;
 		},
@@ -85,18 +85,8 @@ export const CoffeeMapping: React.FC<Props> = () => {
 	}, []);
 
 	useEffect(() => {
-		const coffees = getCoffees();
-		if (!coffees) {
-			setCoffees(coffees);
-		}
+		getCoffees();
 	}, []);
-
-	function findcoffeeById(key: number) {
-		if (!coffees) {
-			return null;
-		}
-		return coffees.find(coffee => coffee.key === key);
-	}
 	function handleCoffeeChange(event: SelectChangeEvent, moduleId: number, stationId: number) {
 		if (!coffees) {
 			return null;
@@ -118,7 +108,6 @@ export const CoffeeMapping: React.FC<Props> = () => {
 			return null;
 		}
 		const state = event.target.checked ? 'active' : 'inactive';
-		debugger;
 		const newCoffeeMap = _.cloneDeep(coffeeMap);
 		const newStation = newCoffeeMap?.find(
 			(coffee: CoffeeMap) => coffee.moduleId === moduleId && coffee.stationId === stationId
@@ -146,14 +135,14 @@ export const CoffeeMapping: React.FC<Props> = () => {
 		if (!coffees) {
 			return null;
 		}
-		const clonedCoffees = _.cloneDeep(coffees);
-		clonedCoffees.sort((a, b) => {
+		const inStock = coffees.filter(coffee => coffee.state === 'instock');
+		inStock.sort((a, b) => {
 			if (a.key === b.key) {
 				return a.key - b.key;
 			}
 			return a.key - b.key;
 		});
-		const coffs = clonedCoffees.map(coffee => {
+		const coffs = inStock.map(coffee => {
 			const { region, roast, key } = coffee;
 			return (
 				<MenuItem key={key} value={key}>
@@ -161,22 +150,8 @@ export const CoffeeMapping: React.FC<Props> = () => {
 				</MenuItem>
 			);
 		});
-		// const coffeeM = clonedMap?.map((element: CoffeeMap, i: number) => {
-		// 	const coffee = findcoffeeById(element.coffeeId);
-		// 	if (!coffee) {
-		// 		// Handle the case where coffee is undefined
-		// 		return null;
-		// 	}
-		// 	const { region, roast, key } = coffee;
-		// 	return (
-		// 		<MenuItem key={i} value={coffee.key}>
-		// 			{`${key} ${roast} ${region}`}
-		// 		</MenuItem>
-		// 	);
-		// });
-		debugger;
 		return (
-			<FormControl fullWidth>
+			<FormControl fullWidth size="small">
 				<InputLabel>Coffee</InputLabel>
 				<Select value={key.toString()} onChange={event => handleCoffeeChange(event, moduleId, stationId)}>
 					{coffs.filter(item => item !== null)}
@@ -189,15 +164,19 @@ export const CoffeeMapping: React.FC<Props> = () => {
 			return <div>Loading...</div>;
 		}
 		return (
-			<TableContainer component={Paper}>
-				<Table aria-label="simple table">
+			<TableContainer component={Paper} css={styles.tableContainer}>
+				<Table size="small" aria-label="simple table">
 					<TableHead>
 						<TableRow>
 							<TableCell align="center" css={styles.cellHeader}>
 								#
 							</TableCell>
-							<TableCell css={styles.cellHeader}>Active</TableCell>
-							<TableCell css={styles.cellHeader}>Coffee</TableCell>
+							<TableCell align="center" css={styles.cellHeader}>
+								Active
+							</TableCell>
+							<TableCell align="center" css={styles.cellHeader}>
+								Coffee
+							</TableCell>
 							<TableCell align="center" css={styles.cellHeader}>
 								Station
 							</TableCell>
@@ -209,13 +188,13 @@ export const CoffeeMapping: React.FC<Props> = () => {
 								<TableCell align="center" css={styles.cell}>
 									{i + 1}
 								</TableCell>
-								<TableCell css={styles.cell}>
+								<TableCell align="center" css={styles.cell}>
 									<Checkbox
 										checked={row.state === 'active'}
 										onChange={event => handleCoffeeActiveChange(event, row.moduleId, row.stationId)}
 									/>
 								</TableCell>
-								<TableCell css={styles.cell}>
+								<TableCell align="center" css={styles.cell}>
 									{renderCoffeeSelect(row.coffeeId, row.moduleId, row.stationId)}
 								</TableCell>
 								<TableCell align="center" css={styles.cell}>{`${row.moduleId + 1} - ${
@@ -230,11 +209,17 @@ export const CoffeeMapping: React.FC<Props> = () => {
 	}
 	function renderButtons() {
 		if (!dirty) {
-			return <div style={{ height: 40 }}></div>;
+			return <div></div>;
 		}
 		return (
 			<div css={styles.buttonContainer}>
-				<Button fullWidth={true} variant="contained" color="primary" onClick={handleSave}>
+				<Button
+					fullWidth={true}
+					variant="contained"
+					color="primary"
+					onClick={handleSave}
+					css={styles.saveButton}
+				>
 					Save
 				</Button>
 			</div>
@@ -242,7 +227,21 @@ export const CoffeeMapping: React.FC<Props> = () => {
 	}
 	return (
 		<div css={styles.container}>
-			{renderButtons()}
+			<div css={styles.header}>
+				<MenuBar dept="home" />
+
+				{dirty ? (
+					<Button
+						fullWidth={true}
+						variant="contained"
+						color="primary"
+						onClick={handleSave}
+						css={styles.saveButton}
+					>
+						Save
+					</Button>
+				) : null}
+			</div>
 			{renderTable()}
 		</div>
 	);
