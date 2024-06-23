@@ -6,10 +6,12 @@ import { blendItem } from '../types';
 import { moduleUrls } from './settings';
 import { CoffeeModule } from '../types';
 import coffeeMapData from './coffeeMap.json';
+import { getMixer } from '../mixer';
 interface moduleInterface {
 	moduleId: number;
 	module: Module;
 }
+const MIX_DURTATION = 4000;
 export interface blenderInterface {
 	blend(blendItems: blendItem[]): Promise<Status>;
 	getCoffeeMap(): Promise<CoffeeModule[]>;
@@ -26,10 +28,11 @@ export class Blender {
 		});
 	}
 	private GetPathByCoffeeId(coffeeId: number): StationPath | undefined {
+		debugger;
 		const active = this.coffeeToModules.filter(coffee => coffee.state === 'active');
 		const coffee: CoffeeModule | undefined = active.find((coffee: CoffeeModule) => coffee.coffeeId === coffeeId);
 		if (!coffee) {
-			return undefined;
+			throw new Error('Coffee not found');
 		}
 		return [coffee.moduleId, coffee.stationId];
 	}
@@ -60,6 +63,8 @@ export class Blender {
 		if (results.some(result => !result.success)) {
 			return { success: false, code: 400, message: 'One or more blends failed' };
 		}
+		//////// mixer goes here
+		getMixer().cycle(MIX_DURTATION);
 		return { success: true, code: 200, message: 'Blend successful' };
 	}
 	public async stop(): Promise<Status> {

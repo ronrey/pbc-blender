@@ -22,7 +22,7 @@ export type StationId = [number, number];
 export class Production {
 	endpoint: string;
 	constructor() {
-		const url = 'http://192.168.0.49:1777/graphql';
+		const url = 'http://localhost:1777/graphql';
 		this.endpoint = url;
 	}
 
@@ -48,6 +48,22 @@ export class Production {
 		`;
 		const coffees: { getCoffees: Coffee } = await request(this.endpoint, query);
 		return coffees.getCoffees;
+	};
+	updateOrderStatus = async (orderId: string, itemId: string, status: string) => {
+		const mutation = gql`
+			mutation SetOrderStatus($setOrderStatusId: String, $status: OrderStatus) {
+				setOrderStatus(id: $setOrderStatusId, status: $status) {
+					success
+					message
+					code
+				}
+			}
+		`;
+		const variables = {
+			orderId: orderId,
+			status: status,
+		};
+		return request(this.endpoint, mutation, variables);
 	};
 }
 

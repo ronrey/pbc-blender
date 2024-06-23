@@ -1,12 +1,22 @@
 import { getModuleByNumber } from '../module';
-
+import { getMixer } from '../mixer';
 import { getBlender } from '../blender';
 import logger from '../winston';
 import { set } from 'lodash';
 import { CoffeeModule, blendItem } from '../types';
+import { getProduction } from '../production';
 export const Mutation = {
-	blend: async (_: null, args: { blend: blendItem[] }) => {
-		return await getBlender().blend(args.blend);
+	blend: async (_: null, args: { orderId: string; itemId: string; blend: blendItem[] }) => {
+		const { blend, itemId, orderId } = args;
+		getProduction().updateOrderStatus(orderId, itemId, 'BLENDING');
+		const status = await getBlender().blend(args.blend);
+		if (status.success) {
+			getProduction().updateOrderStatus(orderId, itemId, 'BLENDED');
+			logger.info(`Blended order ${args.orderId} - BLENDED`);
+		} else {
+			logger.error(`Blended order ${args.orderId} - FAILED`);
+		}
+		return status;
 	},
 	stop: async () => {
 		return await getBlender().stop();
@@ -53,6 +63,16 @@ export const Mutation = {
 		logger.debug('Setting coffee to modules');
 		const status = await blender.setCoffeeMap(coffeeToModules);
 		return status;
+	},
+
+	onMixer: async (_: null, args: null) => {
+		return getMixer().on();
+	},
+	offMixer: async (_: null, args: null) => {
+		return getMixer().off();
+	},
+	cycleMixer: async (_: null, args: { duration: number }) => {
+		return getMixer().cycle(args.duration);
 	},
 };
 export default Mutation;

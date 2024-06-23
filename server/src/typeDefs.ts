@@ -68,7 +68,7 @@ export const typeDefs = gql`
 	type Mutation {
 		stop: Status
 		stopModule(index: Int): Status
-		blend(blend: [BlendItemInput]): Status
+		blend(orderId: ID, itemId: ID, blend: [BlendItemInput]): Status
 		stopFeed(index: Int, nodeId: Int): Status
 		startFeed(index: Int, nodeId: Int): Status
 		feed(index: Int, nodeId: Int, grams: Float): Status
@@ -78,6 +78,9 @@ export const typeDefs = gql`
 		closeGate(index: Int, nodeId: Int): Status
 		cycleGate(index: Int, nodeId: Int): Status
 		setCoffeeMap(coffeeModules: [CoffeeModuleInput!]!): Status
+		cycleMixer(duration: Float): Status
+		onMixer: Status
+		offMixer: Status
 	}
 `;
 export default typeDefs;

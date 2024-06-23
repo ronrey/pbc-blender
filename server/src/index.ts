@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import logger from './winston';
@@ -6,6 +7,7 @@ import express from 'express';
 import http from 'http';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
+dotenv.config();
 
 export interface ContextValue {
 	id?: string;
@@ -21,15 +23,7 @@ const context = async () => {
 async function startApolloServer() {
 	const app = express();
 	const httpServer = http.createServer(app);
-	try {
-	} catch (error) {
-		console.log(`			
-		      Mongo DB Host not found!
-		      please add DB_HOST environment variable to .env file
-		
-		      exiting...			   
-		    `);
-	}
+
 	const server = new ApolloServer({
 		typeDefs,
 		resolvers,
@@ -42,11 +36,11 @@ async function startApolloServer() {
 		path: '/',
 	});
 
-	const PORT = 1768;
+	const port = process.env.PORT || 4000;
 	await new Promise(resolve => {
 		console.log('listen');
-		httpServer.listen({ port: PORT }, () => {
-			logger.info(`🏴‍☠️ Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+		httpServer.listen({ port }, () => {
+			logger.info(`🏴‍☠️ Server ready at http://localhost:${port}${server.graphqlPath}`);
 		});
 	});
 }
