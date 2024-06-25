@@ -50,21 +50,28 @@ export class Blender {
 			blendItems.map(async blendItem => {
 				const path = await this.GetPathByCoffeeId(blendItem.coffeeId);
 				if (!path) {
-					throw new Error('Module not found');
+					throw new Error(`Module not found for coffeeId: ${blendItem.coffeeId}`);
 				}
 				const module = this.modules[path[0]].module;
 				const stationId = path[1];
-				return await module.feed(stationId, blendItem.grams);
+				const result = await module.feed(stationId, blendItem.grams);
+				console.log(`Blending ${blendItem.coffeeId} - ${blendItem.grams} grams, result: ${result.message}	`);
+				return result;
 			})
 		);
 		if (!results) {
+			debugger;
 			return { success: false, code: 400, message: 'blend failed' };
 		}
 		if (results.some(result => !result.success)) {
+			debugger;
+
 			return { success: false, code: 400, message: 'One or more blends failed' };
 		}
 		//////// mixer goes here
-		getMixer().cycle(MIX_DURTATION);
+		debugger;
+
+		await getMixer().cycle(MIX_DURTATION);
 		return { success: true, code: 200, message: 'Blend successful' };
 	}
 	public async stop(): Promise<Status> {

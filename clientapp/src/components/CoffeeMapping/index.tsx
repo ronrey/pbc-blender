@@ -62,6 +62,7 @@ export const CoffeeMapping: React.FC<Props> = () => {
 	const [getCoffeeMap] = useLazyQuery(GET_COFFEE_MAP, {
 		fetchPolicy: 'cache-and-network',
 		onCompleted: data => {
+			console.log(`data.getCoffeeMap`, data.getCoffeeMap);
 			setCoffeeMap(data.getCoffeeMap);
 		},
 		onError: err => {
@@ -160,9 +161,10 @@ export const CoffeeMapping: React.FC<Props> = () => {
 		);
 	}
 	function renderTable() {
-		if (!coffeeMap) {
+		if (!coffeeMap || coffeeMap.length === 0 || !coffees) {
 			return <div>Loading...</div>;
 		}
+		debugger;
 		return (
 			<TableContainer component={Paper} css={styles.tableContainer}>
 				<Table size="small" aria-label="simple table">

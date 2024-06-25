@@ -59,11 +59,13 @@ export class Mixer {
 		return response.off;
 	}
 	async cycle(duration: number): Promise<Status> {
+		console.log(`Cycling mixer for ${duration} seconds`);
 		const variables = {
 			id: 0,
 			duration: duration,
 		};
 		const response: { cycle: Status } = await request(this.endpoint, CYCLE_MIXER, variables);
+		console.log(response.cycle);
 		return response.cycle;
 	}
 }

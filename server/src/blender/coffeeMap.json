@@ -42,32 +42,32 @@
     "stationId": 0
   },
   {
-    "state": "inactive",
-    "coffeeId": 7,
-    "moduleId": 2,
-    "stationId": 1
-  },
-  {
-    "state": "inactive",
-    "coffeeId": 8,
-    "moduleId": 2,
-    "stationId": 2
-  },
-  {
     "state": "active",
-    "coffeeId": 5,
-    "moduleId": 3,
-    "stationId": 0
-  },
-  {
-    "state": "active",
-    "coffeeId": 8,
-    "moduleId": 3,
+    "coffeeId": 16,
+    "moduleId": 2,
     "stationId": 1
   },
   {
     "state": "active",
     "coffeeId": 16,
+    "moduleId": 2,
+    "stationId": 2
+  },
+  {
+    "state": "active",
+    "coffeeId": 11,
+    "moduleId": 3,
+    "stationId": 0
+  },
+  {
+    "state": "active",
+    "coffeeId": 12,
+    "moduleId": 3,
+    "stationId": 1
+  },
+  {
+    "state": "active",
+    "coffeeId": 4,
     "moduleId": 3,
     "stationId": 2
   },

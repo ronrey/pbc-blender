@@ -22,9 +22,9 @@ function useConfig(): config {
 				return response.json();
 			})
 			.then(data => {
-				debugger;
 				setServerName(data.serverName);
 				setServerURL(`http://${data.serverName}:1768`);
+				console.log(`Server Name: ${serverName}`);
 				//	setServerURL(`http://localhost:1768`);
 			})
 			.catch(error => {

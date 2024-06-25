@@ -47,23 +47,26 @@ export class Production {
 			}
 		`;
 		const coffees: { getCoffees: Coffee } = await request(this.endpoint, query);
+
+		logger.info('coffees', coffees);
 		return coffees.getCoffees;
 	};
 	updateOrderStatus = async (orderId: string, itemId: string, status: string) => {
-		const mutation = gql`
-			mutation SetOrderStatus($setOrderStatusId: String, $status: OrderStatus) {
-				setOrderStatus(id: $setOrderStatusId, status: $status) {
-					success
-					message
-					code
-				}
-			}
-		`;
-		const variables = {
-			orderId: orderId,
-			status: status,
-		};
-		return request(this.endpoint, mutation, variables);
+		// const mutation = gql`
+		// 	mutation SetOrderStatus($orderId: String, $itemId: String, $status: OrderStatus) {
+		// 		setOrderStatus(orderId: $orderId, itemId: $itemId, status: $status) {
+		// 			success
+		// 			message
+		// 			code
+		// 		}
+		// 	}
+		// `;
+		// const variables = {
+		// 	orderId: orderId,
+		// 	itemId: itemId,
+		// 	status: status,
+		// };
+		// return request(this.endpoint, mutation, variables);
 	};
 }
 

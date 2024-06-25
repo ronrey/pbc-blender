@@ -53,7 +53,7 @@ export class Module {
 		const node = {
 			grams: grams,
 		};
-		console.log('data', node);
+		//console.log('data', node);
 		return node;
 	};
 	async feed(stationId: number, grams: number): Promise<Status> {
@@ -61,9 +61,9 @@ export class Module {
 			grams: grams,
 			nodeId: stationId,
 		};
-		console.log('feed', variables, this.endpoint);
+		//console.log('feed', variables, this.endpoint);
 		const response = (await request(this.endpoint, FEED, variables)) as Status;
-		console.log('data', response);
+		//console.log('data', response);
 		return response;
 	}
 	async getServerName(): Promise<string> {
@@ -76,7 +76,7 @@ export class Module {
 				}
 			`
 		);
-		logger.info('endpoint', this.endpoint);
+		//logger.info('endpoint', this.endpoint);
 		logger.info('serverName', serverName);
 		return serverName.getServerName;
 	}

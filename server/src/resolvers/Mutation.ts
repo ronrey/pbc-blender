@@ -4,17 +4,14 @@ import { getBlender } from '../blender';
 import logger from '../winston';
 import { set } from 'lodash';
 import { CoffeeModule, blendItem } from '../types';
-import { getProduction } from '../production';
 export const Mutation = {
 	blend: async (_: null, args: { orderId: string; itemId: string; blend: blendItem[] }) => {
 		const { blend, itemId, orderId } = args;
-		getProduction().updateOrderStatus(orderId, itemId, 'BLENDING');
 		const status = await getBlender().blend(args.blend);
 		if (status.success) {
-			getProduction().updateOrderStatus(orderId, itemId, 'BLENDED');
 			logger.info(`Blended order ${args.orderId} - BLENDED`);
 		} else {
-			logger.error(`Blended order ${args.orderId} - FAILED`);
+			logger.error(`Blended order ${args.orderId} - FAILED, status: ${status.message}`);
 		}
 		return status;
 	},
