@@ -2,13 +2,11 @@ import dotenv from 'dotenv';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import logger from './winston';
-
 import express from 'express';
 import http from 'http';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 dotenv.config();
-
 export interface ContextValue {
 	id?: string;
 }
@@ -19,7 +17,6 @@ const context = async () => {
 
 	return { id: 'TEST' };
 };
-
 async function startApolloServer() {
 	const app = express();
 	const httpServer = http.createServer(app);
@@ -35,7 +32,6 @@ async function startApolloServer() {
 		app,
 		path: '/',
 	});
-
 	const port = process.env.PORT || 4000;
 	await new Promise(resolve => {
 		console.log('listen');
@@ -44,5 +40,4 @@ async function startApolloServer() {
 		});
 	});
 }
-
 startApolloServer();

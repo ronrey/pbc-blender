@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-// src/Counter.tsx
 import React, { useState, useEffect } from 'react';
 import { styles } from './styles';
 import { useMutation, gql, useLazyQuery } from '@apollo/client';
@@ -18,7 +17,6 @@ import Checkbox from '@mui/material/Checkbox';
 import { Button, Paper } from '@mui/material';
 import { CoffeeMap, Coffee } from '../../types';
 import { MenuBar } from '../menuBar';
-
 interface Props {}
 export const CoffeeMapping: React.FC<Props> = () => {
 	const SET_COFFEE_MAP = gql`
@@ -207,24 +205,6 @@ export const CoffeeMapping: React.FC<Props> = () => {
 					</TableBody>
 				</Table>
 			</TableContainer>
-		);
-	}
-	function renderButtons() {
-		if (!dirty) {
-			return <div></div>;
-		}
-		return (
-			<div css={styles.buttonContainer}>
-				<Button
-					fullWidth={true}
-					variant="contained"
-					color="primary"
-					onClick={handleSave}
-					css={styles.saveButton}
-				>
-					Save
-				</Button>
-			</div>
 		);
 	}
 	return (

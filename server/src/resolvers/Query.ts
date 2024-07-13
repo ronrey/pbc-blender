@@ -1,8 +1,6 @@
-import { get } from 'lodash';
 import { getModuleByNumber } from '../module';
 import { getBlender } from '../blender';
-import { Production, getProduction } from '../production';
-
+import { getProduction } from '../production';
 export const Query = {
 	status: async (_: null) => {
 		return { success: true, code: '200', message: 'status' };
@@ -30,7 +28,6 @@ export const Query = {
 			index: args.index,
 			nodeId: args.nodeId,
 		};
-		return getModuleByNumber(args.index).getSiloGrams(args.nodeId);
 	},
 	getScaleBaseline: async (_: null, args: { index: number; nodeId: number }) => {
 		return getModuleByNumber(args.index).getScaleBaseline(args.nodeId);

@@ -1,6 +1,4 @@
 import { request, gql } from 'graphql-request';
-import { Status } from '../types';
-import { moduleUrls } from '../blender/settings';
 import { Coffee } from '../types';
 import logger from '../winston';
 const GET_COFFEE_BY_KEY = gql`
@@ -14,7 +12,6 @@ const GET_COFFEE_BY_KEY = gql`
 		}
 	}
 `;
-
 export interface ProductionInterface {
 	getCoffeeByKey(key: number): Coffee;
 }
@@ -25,7 +22,6 @@ export class Production {
 		const url = 'http://localhost:1777/graphql';
 		this.endpoint = url;
 	}
-
 	getCoffeeByKey = async (key: number) => {
 		debugger;
 		const variables = {
@@ -47,29 +43,9 @@ export class Production {
 			}
 		`;
 		const coffees: { getCoffees: Coffee } = await request(this.endpoint, query);
-
-		logger.info('coffees', coffees);
 		return coffees.getCoffees;
 	};
-	updateOrderStatus = async (orderId: string, itemId: string, status: string) => {
-		// const mutation = gql`
-		// 	mutation SetOrderStatus($orderId: String, $itemId: String, $status: OrderStatus) {
-		// 		setOrderStatus(orderId: $orderId, itemId: $itemId, status: $status) {
-		// 			success
-		// 			message
-		// 			code
-		// 		}
-		// 	}
-		// `;
-		// const variables = {
-		// 	orderId: orderId,
-		// 	itemId: itemId,
-		// 	status: status,
-		// };
-		// return request(this.endpoint, mutation, variables);
-	};
 }
-
 export function getProduction() {
 	return new Production();
 }

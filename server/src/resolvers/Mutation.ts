@@ -5,7 +5,7 @@ import logger from '../winston';
 import { set } from 'lodash';
 import { CoffeeModule, blendItem } from '../types';
 export const Mutation = {
-	blend: async (_: null, args: { orderId: string; itemId: string; blend: blendItem[] }) => {
+	blend: async (_: null, args: { orderId: string; itemId: number; blend: blendItem[] }) => {
 		const { blend, itemId, orderId } = args;
 		const status = await getBlender().blend(args.blend);
 		if (status.success) {

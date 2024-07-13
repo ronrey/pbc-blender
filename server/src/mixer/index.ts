@@ -1,8 +1,3 @@
-// on(id: Int): Status
-// off(id: Int): Status
-// cycle(id: Int, duration: Float): Status
-// offAll: Status
-
 import { request, gql } from 'graphql-request';
 import { Status } from '../types';
 import logger from '../winston';
@@ -59,18 +54,15 @@ export class Mixer {
 		return response.off;
 	}
 	async cycle(duration: number): Promise<Status> {
-		console.log(`Cycling mixer for ${duration} seconds`);
 		const variables = {
 			id: 0,
 			duration: duration,
 		};
 		const response: { cycle: Status } = await request(this.endpoint, CYCLE_MIXER, variables);
-		console.log(response.cycle);
 		return response.cycle;
 	}
 }
 export function getMixer() {
 	return new Mixer(ENDPOINT);
 }
-
 export default Mixer;

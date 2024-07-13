@@ -1,7 +1,6 @@
 import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
 	scalar DateTime
-
 	type Status {
 		success: Boolean
 		code: String
@@ -16,14 +15,12 @@ export const typeDefs = gql`
 		coffeeId: Int!
 		grams: Float!
 	}
-
 	type CoffeeModule {
 		coffeeId: Int!
 		moduleId: Int!
 		stationId: Int!
 		state: String!
 	}
-
 	input CoffeeModuleInput {
 		coffeeId: Int!
 		moduleId: Int!
@@ -68,7 +65,7 @@ export const typeDefs = gql`
 	type Mutation {
 		stop: Status
 		stopModule(index: Int): Status
-		blend(orderId: ID, itemId: ID, blend: [BlendItemInput]): Status
+		blend(orderId: ID, itemId: Int, blend: [BlendItemInput]): Status
 		stopFeed(index: Int, nodeId: Int): Status
 		startFeed(index: Int, nodeId: Int): Status
 		feed(index: Int, nodeId: Int, grams: Float): Status

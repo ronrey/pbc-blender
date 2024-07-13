@@ -7,6 +7,7 @@ import { moduleUrls } from './settings';
 import { CoffeeModule } from '../types';
 import coffeeMapData from './coffeeMap.json';
 import { getMixer } from '../mixer';
+import logger from '../winston';
 interface moduleInterface {
 	moduleId: number;
 	module: Module;
@@ -27,30 +28,17 @@ export class Blender {
 			return { moduleId: i, module: new Module(m) };
 		});
 	}
-	// private GetPathByCoffeeId(coffeeId: number): StationPath | undefined {
-	// 	debugger;
-	// 	const active = this.coffeeToModules.filter(coffee => coffee.state === 'active');
-	// 	const coffee: CoffeeModule | undefined = active.find((coffee: CoffeeModule) => coffee.coffeeId === coffeeId);
-	// 	if (!coffee) {
-	// 		throw new Error('Coffee not found');
-	// 	}
-	// 	return [coffee.moduleId, coffee.stationId];
-	// }
 	private async GetPathByCoffeeId(coffeeId: number): Promise<StationPath | undefined> {
 		const active = this.coffeeToModules.filter(coffee => coffee.state === 'active' && coffee.coffeeId === coffeeId);
-
 		if (active.length === 0) {
 			throw new Error('Coffee not found or not active');
 		}
-
 		if (active.length === 1) {
 			return [active[0].moduleId, active[0].stationId];
 		}
-
 		// Multiple stations with the same coffee, find the one with the most coffee
 		let maxCoffeeAmount = -1;
 		let selectedStation: CoffeeModule | undefined;
-
 		for (const station of active) {
 			const module = this.modules[station.moduleId].module;
 			const coffeeAmount = await module.getSiloGrams(station.stationId);
@@ -60,11 +48,9 @@ export class Blender {
 				selectedStation = station;
 			}
 		}
-
 		if (!selectedStation) {
 			throw new Error('Unable to determine station with most coffee');
 		}
-
 		return [selectedStation.moduleId, selectedStation.stationId];
 	}
 	public async setCoffeeMap(coffeeToModules: CoffeeModule[]): Promise<Status> {
@@ -86,7 +72,7 @@ export class Blender {
 				const module = this.modules[path[0]].module;
 				const stationId = path[1];
 				const result = await module.feed(stationId, blendItem.grams);
-				console.log(`Blending ${blendItem.coffeeId} - ${blendItem.grams} grams, result: ${result.message}	`);
+				logger.info(`Blending ${blendItem.coffeeId} - ${blendItem.grams} grams, result: ${result.message}	`);
 				return result;
 			})
 		);
@@ -94,14 +80,7 @@ export class Blender {
 			debugger;
 			return { success: false, code: 400, message: 'blend failed' };
 		}
-		if (results.some(result => !result.success)) {
-			debugger;
-
-			return { success: false, code: 400, message: 'One or more blends failed' };
-		}
-		//////// mixer goes here
-		debugger;
-
+		logger.info(`Cycling mixer for ${MIX_DURTATION} seconds`);
 		await getMixer().cycle(MIX_DURTATION);
 		return { success: true, code: 200, message: 'Blend successful' };
 	}
